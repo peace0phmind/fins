@@ -11,26 +11,40 @@ import (
 
 const (
 	// MemoryAreaCIOBit is a MemoryArea of type CIOBit.
-	MemoryAreaCIOBit MemoryArea = 48
+	MemoryAreaCIOBit MemoryArea = 48 // CIO Area
 	// MemoryAreaWBit is a MemoryArea of type WBit.
-	MemoryAreaWBit MemoryArea = 49
+	MemoryAreaWBit MemoryArea = 49 // Work Area
 	// MemoryAreaHBit is a MemoryArea of type HBit.
-	MemoryAreaHBit MemoryArea = 50
+	MemoryAreaHBit MemoryArea = 50 // Holding Bit Area
 	// MemoryAreaABit is a MemoryArea of type ABit.
-	MemoryAreaABit MemoryArea = 51
+	MemoryAreaABit MemoryArea = 51 // Auxiliary Bit Area
 	// MemoryAreaCIOWord is a MemoryArea of type CIOWord.
-	MemoryAreaCIOWord MemoryArea = 176
+	MemoryAreaCIOWord MemoryArea = 176 // CIO Area
 	// MemoryAreaWWord is a MemoryArea of type WWord.
-	MemoryAreaWWord MemoryArea = 177
+	MemoryAreaWWord MemoryArea = 177 // Work Area
 	// MemoryAreaHWord is a MemoryArea of type HWord.
-	MemoryAreaHWord MemoryArea = 178
+	MemoryAreaHWord MemoryArea = 178 // Holding Bit Area
 	// MemoryAreaAWord is a MemoryArea of type AWord.
-	MemoryAreaAWord MemoryArea = 179
+	MemoryAreaAWord MemoryArea = 179 // Auxiliary Bit Area
+	// MemoryAreaTBit is a MemoryArea of type TBit.
+	MemoryAreaTBit MemoryArea = 9 // Timer Area
+	// MemoryAreaTWord is a MemoryArea of type TWord.
+	//CBit(1, "C", "CF") = 0x09			// Counter Area
+	MemoryAreaTWord MemoryArea = 137 // Timer Area
+	// MemoryAreaDBit is a MemoryArea of type DBit.
+	//CWord(2, "C", "PV") = 0x89			// Counter Area
+	MemoryAreaDBit MemoryArea = 2 // DM Area
+	// MemoryAreaDWord is a MemoryArea of type DWord.
+	MemoryAreaDWord MemoryArea = 130 // DM Area
+	// MemoryAreaIR is a MemoryArea of type IR.
+	MemoryAreaIR MemoryArea = 220 // Index Register
+	// MemoryAreaDR is a MemoryArea of type DR.
+	MemoryAreaDR MemoryArea = 188 // Data Register
 )
 
 var ErrInvalidMemoryArea = errors.New("not a valid MemoryArea")
 
-var _MemoryAreaName = "CIOBitWBitHBitABitCIOWordWWordHWordAWord"
+var _MemoryAreaName = "CIOBitWBitHBitABitCIOWordWWordHWordAWordTBitTWordDBitDWordIRDR"
 
 var _MemoryAreaMapName = map[MemoryArea]string{
 	MemoryAreaCIOBit:  _MemoryAreaName[0:6],
@@ -41,6 +55,12 @@ var _MemoryAreaMapName = map[MemoryArea]string{
 	MemoryAreaWWord:   _MemoryAreaName[25:30],
 	MemoryAreaHWord:   _MemoryAreaName[30:35],
 	MemoryAreaAWord:   _MemoryAreaName[35:40],
+	MemoryAreaTBit:    _MemoryAreaName[40:44],
+	MemoryAreaTWord:   _MemoryAreaName[44:49],
+	MemoryAreaDBit:    _MemoryAreaName[49:53],
+	MemoryAreaDWord:   _MemoryAreaName[53:58],
+	MemoryAreaIR:      _MemoryAreaName[58:60],
+	MemoryAreaDR:      _MemoryAreaName[60:62],
 }
 
 // Name is the attribute of MemoryArea.
@@ -60,6 +80,12 @@ var _MemoryAreaMapSize = map[MemoryArea]int{
 	MemoryAreaWWord:   2,
 	MemoryAreaHWord:   2,
 	MemoryAreaAWord:   2,
+	MemoryAreaTBit:    1,
+	MemoryAreaTWord:   2,
+	MemoryAreaDBit:    1,
+	MemoryAreaDWord:   2,
+	MemoryAreaIR:      4,
+	MemoryAreaDR:      2,
 }
 
 // Size is the attribute of MemoryArea.
@@ -79,6 +105,12 @@ var _MemoryAreaMapAreaName = map[MemoryArea]string{
 	MemoryAreaWWord:   "W",
 	MemoryAreaHWord:   "H",
 	MemoryAreaAWord:   "A",
+	MemoryAreaTBit:    "T",
+	MemoryAreaTWord:   "T",
+	MemoryAreaDBit:    "D",
+	MemoryAreaDWord:   "D",
+	MemoryAreaIR:      "IR",
+	MemoryAreaDR:      "DR",
 }
 
 // AreaName is the attribute of MemoryArea.
@@ -98,6 +130,12 @@ var _MemoryAreaMapDateType = map[MemoryArea]string{
 	MemoryAreaWWord:   "Word",
 	MemoryAreaHWord:   "Word",
 	MemoryAreaAWord:   "Word",
+	MemoryAreaTBit:    "CF",
+	MemoryAreaTWord:   "PV",
+	MemoryAreaDBit:    "Bit",
+	MemoryAreaDWord:   "Word",
+	MemoryAreaIR:      "PV",
+	MemoryAreaDR:      "PV",
 }
 
 // DateType is the attribute of MemoryArea.
@@ -134,6 +172,12 @@ var _MemoryAreaNameMap = map[string]MemoryArea{
 	_MemoryAreaName[25:30]: MemoryAreaWWord,
 	_MemoryAreaName[30:35]: MemoryAreaHWord,
 	_MemoryAreaName[35:40]: MemoryAreaAWord,
+	_MemoryAreaName[40:44]: MemoryAreaTBit,
+	_MemoryAreaName[44:49]: MemoryAreaTWord,
+	_MemoryAreaName[49:53]: MemoryAreaDBit,
+	_MemoryAreaName[53:58]: MemoryAreaDWord,
+	_MemoryAreaName[58:60]: MemoryAreaIR,
+	_MemoryAreaName[60:62]: MemoryAreaDR,
 }
 
 // ParseMemoryArea converts a string to a MemoryArea.
