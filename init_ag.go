@@ -10,6 +10,19 @@ import (
 )
 
 const (
+	// CommandMemoryRead is a Command of type MemoryRead.
+	CommandMemoryRead Command = iota
+	// CommandMemoryWrite is a Command of type MemoryWrite.
+	CommandMemoryWrite
+	// CommandMemoryFill is a Command of type MemoryFill.
+	CommandMemoryFill
+	// CommandMultipleMemoryRead is a Command of type MultipleMemoryRead.
+	CommandMultipleMemoryRead
+	// CommandMemoryTransfer is a Command of type MemoryTransfer.
+	CommandMemoryTransfer
+)
+
+const (
 	// MemoryAreaCIOBit is a MemoryArea of type CIOBit.
 	MemoryAreaCIOBit MemoryArea = 48 // CIO Area
 	// MemoryAreaWBit is a MemoryArea of type WBit.
@@ -41,6 +54,91 @@ const (
 	// MemoryAreaDR is a MemoryArea of type DR.
 	MemoryAreaDR MemoryArea = 188 // Data Register
 )
+
+var ErrInvalidCommand = errors.New("not a valid Command")
+
+var _CommandName = "MemoryReadMemoryWriteMemoryFillMultipleMemoryReadMemoryTransfer"
+
+var _CommandMapName = map[Command]string{
+	CommandMemoryRead:         _CommandName[0:10],
+	CommandMemoryWrite:        _CommandName[10:21],
+	CommandMemoryFill:         _CommandName[21:31],
+	CommandMultipleMemoryRead: _CommandName[31:49],
+	CommandMemoryTransfer:     _CommandName[49:63],
+}
+
+// Name is the attribute of Command.
+func (x Command) Name() string {
+	if v, ok := _CommandMapName[x]; ok {
+		return v
+	}
+	return fmt.Sprintf("Command(%d).Name", x)
+}
+
+var _CommandMapMr = map[Command]uint8{
+	CommandMemoryRead:         1,
+	CommandMemoryWrite:        1,
+	CommandMemoryFill:         1,
+	CommandMultipleMemoryRead: 1,
+	CommandMemoryTransfer:     1,
+}
+
+// Mr is the attribute of Command.
+func (x Command) Mr() uint8 {
+	if v, ok := _CommandMapMr[x]; ok {
+		return v
+	}
+	return 0
+}
+
+var _CommandMapSr = map[Command]uint8{
+	CommandMemoryRead:         1,
+	CommandMemoryWrite:        2,
+	CommandMemoryFill:         3,
+	CommandMultipleMemoryRead: 4,
+	CommandMemoryTransfer:     5,
+}
+
+// Sr is the attribute of Command.
+func (x Command) Sr() uint8 {
+	if v, ok := _CommandMapSr[x]; ok {
+		return v
+	}
+	return 0
+}
+
+// Val is the attribute of Command.
+func (x Command) Val() int {
+	return int(x)
+}
+
+// IsValid provides a quick way to determine if the typed value is
+// part of the allowed enumerated values
+func (x Command) IsValid() bool {
+	_, ok := _CommandMapName[x]
+	return ok
+}
+
+// String implements the Stringer interface.
+func (x Command) String() string {
+	return x.Name()
+}
+
+var _CommandNameMap = map[string]Command{
+	_CommandName[0:10]:  CommandMemoryRead,
+	_CommandName[10:21]: CommandMemoryWrite,
+	_CommandName[21:31]: CommandMemoryFill,
+	_CommandName[31:49]: CommandMultipleMemoryRead,
+	_CommandName[49:63]: CommandMemoryTransfer,
+}
+
+// ParseCommand converts a string to a Command.
+func ParseCommand(value string) (Command, error) {
+	if x, ok := _CommandNameMap[value]; ok {
+		return x, nil
+	}
+	return Command(0), fmt.Errorf("%s is %w", value, ErrInvalidCommand)
+}
 
 var ErrInvalidMemoryArea = errors.New("not a valid MemoryArea")
 

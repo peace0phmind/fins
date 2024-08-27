@@ -24,3 +24,16 @@ MemoryArea
 	}
 */
 type MemoryArea byte
+
+/*
+Command
+
+	@Enum(mr byte, sr byte) {
+		MemoryRead(1, 1)
+		MemoryWrite(1, 2)
+		MemoryFill(1, 3)
+		MultipleMemoryRead(1, 4)
+		MemoryTransfer(1, 5)
+	}
+*/
+type Command int
