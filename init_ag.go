@@ -63,53 +63,53 @@ const (
 
 const (
 	// MemoryAreaCIOBit is a MemoryArea of type CIOBit.
-	MemoryAreaCIOBit MemoryArea = iota // CIO Area Bit
-	// MemoryAreaWBit is a MemoryArea of type WBit.
-	MemoryAreaWBit // Work Area Bit
-	// MemoryAreaHBit is a MemoryArea of type HBit.
-	MemoryAreaHBit // Holding Bit Area Bit
-	// MemoryAreaABit is a MemoryArea of type ABit.
-	MemoryAreaABit // Auxiliary Bit Area Bit
+	MemoryAreaCIOBit MemoryArea = "CIOBit" // CIO Area Bit
+	// MemoryAreaWRBit is a MemoryArea of type WRBit.
+	MemoryAreaWRBit MemoryArea = "WRBit" // Work Area Bit
+	// MemoryAreaHRBit is a MemoryArea of type HRBit.
+	MemoryAreaHRBit MemoryArea = "HRBit" // Holding Bit Area Bit
+	// MemoryAreaARBit is a MemoryArea of type ARBit.
+	MemoryAreaARBit MemoryArea = "ARBit" // Auxiliary Bit Area Bit
 	// MemoryAreaCIOBitFs is a MemoryArea of type CIOBitFs.
-	MemoryAreaCIOBitFs // CIO Area Bit with forced status
-	// MemoryAreaWBitFs is a MemoryArea of type WBitFs.
-	MemoryAreaWBitFs // Work Area Bit with forced status
-	// MemoryAreaHBitFs is a MemoryArea of type HBitFs.
-	MemoryAreaHBitFs // Holding Bit Area Bit with forced status
+	MemoryAreaCIOBitFs MemoryArea = "CIOBitFs" // CIO Area Bit with forced status
+	// MemoryAreaWRBitFs is a MemoryArea of type WRBitFs.
+	MemoryAreaWRBitFs MemoryArea = "WRBitFs" // Work Area Bit with forced status
+	// MemoryAreaHRBitFs is a MemoryArea of type HRBitFs.
+	MemoryAreaHRBitFs MemoryArea = "HRBitFs" // Holding Bit Area Bit with forced status
 	// MemoryAreaCIOWord is a MemoryArea of type CIOWord.
-	MemoryAreaCIOWord // CIO Area Word
-	// MemoryAreaWWord is a MemoryArea of type WWord.
-	MemoryAreaWWord // Work Area Word
-	// MemoryAreaHWord is a MemoryArea of type HWord.
-	MemoryAreaHWord // Holding Bit Area Word
-	// MemoryAreaAWord is a MemoryArea of type AWord.
-	MemoryAreaAWord // Auxiliary Bit Area Word
+	MemoryAreaCIOWord MemoryArea = "CIOWord" // CIO Area Word
+	// MemoryAreaWRWord is a MemoryArea of type WRWord.
+	MemoryAreaWRWord MemoryArea = "WRWord" // Work Area Word
+	// MemoryAreaHRWord is a MemoryArea of type HRWord.
+	MemoryAreaHRWord MemoryArea = "HRWord" // Holding Bit Area Word
+	// MemoryAreaARWord is a MemoryArea of type ARWord.
+	MemoryAreaARWord MemoryArea = "ARWord" // Auxiliary Bit Area Word
 	// MemoryAreaCIOWordFs is a MemoryArea of type CIOWordFs.
-	MemoryAreaCIOWordFs // CIO Area Word with forced status
-	// MemoryAreaWWordFs is a MemoryArea of type WWordFs.
-	MemoryAreaWWordFs // Work Area Word with forced status
-	// MemoryAreaHWordFs is a MemoryArea of type HWordFs.
-	MemoryAreaHWordFs // Holding Bit Area Word with forced status
-	// MemoryAreaTBit is a MemoryArea of type TBit.
-	MemoryAreaTBit // Timer Area
-	// MemoryAreaCBit is a MemoryArea of type CBit.
-	MemoryAreaCBit // Counter Area
-	// MemoryAreaTBitFs is a MemoryArea of type TBitFs.
-	MemoryAreaTBitFs // Timer Area with forced status
-	// MemoryAreaCBitFs is a MemoryArea of type CBitFs.
-	MemoryAreaCBitFs // Counter Area with forced status
-	// MemoryAreaTWord is a MemoryArea of type TWord.
-	MemoryAreaTWord // Timer Area
-	// MemoryAreaCWord is a MemoryArea of type CWord.
-	MemoryAreaCWord // Counter Area
-	// MemoryAreaDBit is a MemoryArea of type DBit.
-	MemoryAreaDBit // DM Area
-	// MemoryAreaDWord is a MemoryArea of type DWord.
-	MemoryAreaDWord // DM Area
-	// MemoryAreaIR is a MemoryArea of type IR.
-	MemoryAreaIR // Index Register
-	// MemoryAreaDR is a MemoryArea of type DR.
-	MemoryAreaDR // Data Register
+	MemoryAreaCIOWordFs MemoryArea = "CIOWordFs" // CIO Area Word with forced status
+	// MemoryAreaWRWordFs is a MemoryArea of type WRWordFs.
+	MemoryAreaWRWordFs MemoryArea = "WRWordFs" // Work Area Word with forced status
+	// MemoryAreaHRWordFs is a MemoryArea of type HRWordFs.
+	MemoryAreaHRWordFs MemoryArea = "HRWordFs" // Holding Bit Area Word with forced status
+	// MemoryAreaTIMCF is a MemoryArea of type TIMCF.
+	MemoryAreaTIMCF MemoryArea = "TIMCF" // Timer Area
+	// MemoryAreaCNTCF is a MemoryArea of type CNTCF.
+	MemoryAreaCNTCF MemoryArea = "CNTCF" // Counter Area
+	// MemoryAreaTIMCFFs is a MemoryArea of type TIMCFFs.
+	MemoryAreaTIMCFFs MemoryArea = "TIMCFFs" // Timer Area with forced status
+	// MemoryAreaCNTCFFs is a MemoryArea of type CNTCFFs.
+	MemoryAreaCNTCFFs MemoryArea = "CNTCFFs" // Counter Area with forced status
+	// MemoryAreaTIMPV is a MemoryArea of type TIMPV.
+	MemoryAreaTIMPV MemoryArea = "TIMPV" // Timer Area
+	// MemoryAreaCNTPV is a MemoryArea of type CNTPV.
+	MemoryAreaCNTPV MemoryArea = "CNTPV" // Counter Area
+	// MemoryAreaDMBit is a MemoryArea of type DMBit.
+	MemoryAreaDMBit MemoryArea = "DMBit" // DM Area
+	// MemoryAreaDMWord is a MemoryArea of type DMWord.
+	MemoryAreaDMWord MemoryArea = "DMWord" // DM Area
+	// MemoryAreaIRPV is a MemoryArea of type IRPV.
+	MemoryAreaIRPV MemoryArea = "IRPV" // Index Register
+	// MemoryAreaDRPV is a MemoryArea of type DRPV.
+	MemoryAreaDRPV MemoryArea = "DRPV" // Data Register
 )
 
 const (
@@ -310,68 +310,90 @@ func ParseDataType(value string) (DataType, error) {
 
 var ErrInvalidMemoryArea = errors.New("not a valid MemoryArea")
 
-var _MemoryAreaName = "CIOBitWBitHBitABitCIOBitFsWBitFsHBitFsCIOWordWWordHWordAWordCIOWordFsWWordFsHWordFsTBitCBitTBitFsCBitFsTWordCWordDBitDWordIRDR"
-
-var _MemoryAreaMapName = map[MemoryArea]string{
-	MemoryAreaCIOBit:    _MemoryAreaName[0:6],
-	MemoryAreaWBit:      _MemoryAreaName[6:10],
-	MemoryAreaHBit:      _MemoryAreaName[10:14],
-	MemoryAreaABit:      _MemoryAreaName[14:18],
-	MemoryAreaCIOBitFs:  _MemoryAreaName[18:26],
-	MemoryAreaWBitFs:    _MemoryAreaName[26:32],
-	MemoryAreaHBitFs:    _MemoryAreaName[32:38],
-	MemoryAreaCIOWord:   _MemoryAreaName[38:45],
-	MemoryAreaWWord:     _MemoryAreaName[45:50],
-	MemoryAreaHWord:     _MemoryAreaName[50:55],
-	MemoryAreaAWord:     _MemoryAreaName[55:60],
-	MemoryAreaCIOWordFs: _MemoryAreaName[60:69],
-	MemoryAreaWWordFs:   _MemoryAreaName[69:76],
-	MemoryAreaHWordFs:   _MemoryAreaName[76:83],
-	MemoryAreaTBit:      _MemoryAreaName[83:87],
-	MemoryAreaCBit:      _MemoryAreaName[87:91],
-	MemoryAreaTBitFs:    _MemoryAreaName[91:97],
-	MemoryAreaCBitFs:    _MemoryAreaName[97:103],
-	MemoryAreaTWord:     _MemoryAreaName[103:108],
-	MemoryAreaCWord:     _MemoryAreaName[108:113],
-	MemoryAreaDBit:      _MemoryAreaName[113:117],
-	MemoryAreaDWord:     _MemoryAreaName[117:122],
-	MemoryAreaIR:        _MemoryAreaName[122:124],
-	MemoryAreaDR:        _MemoryAreaName[124:126],
+var _MemoryAreaNameMap = map[string]MemoryArea{
+	"CIOBit":    MemoryAreaCIOBit,
+	"ciobit":    MemoryAreaCIOBit,
+	"WRBit":     MemoryAreaWRBit,
+	"wrbit":     MemoryAreaWRBit,
+	"HRBit":     MemoryAreaHRBit,
+	"hrbit":     MemoryAreaHRBit,
+	"ARBit":     MemoryAreaARBit,
+	"arbit":     MemoryAreaARBit,
+	"CIOBitFs":  MemoryAreaCIOBitFs,
+	"ciobitfs":  MemoryAreaCIOBitFs,
+	"WRBitFs":   MemoryAreaWRBitFs,
+	"wrbitfs":   MemoryAreaWRBitFs,
+	"HRBitFs":   MemoryAreaHRBitFs,
+	"hrbitfs":   MemoryAreaHRBitFs,
+	"CIOWord":   MemoryAreaCIOWord,
+	"cioword":   MemoryAreaCIOWord,
+	"WRWord":    MemoryAreaWRWord,
+	"wrword":    MemoryAreaWRWord,
+	"HRWord":    MemoryAreaHRWord,
+	"hrword":    MemoryAreaHRWord,
+	"ARWord":    MemoryAreaARWord,
+	"arword":    MemoryAreaARWord,
+	"CIOWordFs": MemoryAreaCIOWordFs,
+	"ciowordfs": MemoryAreaCIOWordFs,
+	"WRWordFs":  MemoryAreaWRWordFs,
+	"wrwordfs":  MemoryAreaWRWordFs,
+	"HRWordFs":  MemoryAreaHRWordFs,
+	"hrwordfs":  MemoryAreaHRWordFs,
+	"TIMCF":     MemoryAreaTIMCF,
+	"timcf":     MemoryAreaTIMCF,
+	"CNTCF":     MemoryAreaCNTCF,
+	"cntcf":     MemoryAreaCNTCF,
+	"TIMCFFs":   MemoryAreaTIMCFFs,
+	"timcffs":   MemoryAreaTIMCFFs,
+	"CNTCFFs":   MemoryAreaCNTCFFs,
+	"cntcffs":   MemoryAreaCNTCFFs,
+	"TIMPV":     MemoryAreaTIMPV,
+	"timpv":     MemoryAreaTIMPV,
+	"CNTPV":     MemoryAreaCNTPV,
+	"cntpv":     MemoryAreaCNTPV,
+	"DMBit":     MemoryAreaDMBit,
+	"dmbit":     MemoryAreaDMBit,
+	"DMWord":    MemoryAreaDMWord,
+	"dmword":    MemoryAreaDMWord,
+	"IRPV":      MemoryAreaIRPV,
+	"irpv":      MemoryAreaIRPV,
+	"DRPV":      MemoryAreaDRPV,
+	"drpv":      MemoryAreaDRPV,
 }
 
 // Name is the attribute of MemoryArea.
 func (x MemoryArea) Name() string {
-	if v, ok := _MemoryAreaMapName[x]; ok {
-		return v
+	if v, ok := _MemoryAreaNameMap[string(x)]; ok {
+		return string(v)
 	}
-	return fmt.Sprintf("MemoryArea(%d).Name", x)
+	return fmt.Sprintf("MemoryArea(%s).Name", string(x))
 }
 
 var _MemoryAreaMapAreaName = map[MemoryArea]string{
 	MemoryAreaCIOBit:    "CIO",
-	MemoryAreaWBit:      "WR",
-	MemoryAreaHBit:      "HR",
-	MemoryAreaABit:      "AR",
+	MemoryAreaWRBit:     "WR",
+	MemoryAreaHRBit:     "HR",
+	MemoryAreaARBit:     "AR",
 	MemoryAreaCIOBitFs:  "CIO",
-	MemoryAreaWBitFs:    "WR",
-	MemoryAreaHBitFs:    "HR",
+	MemoryAreaWRBitFs:   "WR",
+	MemoryAreaHRBitFs:   "HR",
 	MemoryAreaCIOWord:   "CIO",
-	MemoryAreaWWord:     "WR",
-	MemoryAreaHWord:     "HR",
-	MemoryAreaAWord:     "AR",
+	MemoryAreaWRWord:    "WR",
+	MemoryAreaHRWord:    "HR",
+	MemoryAreaARWord:    "AR",
 	MemoryAreaCIOWordFs: "CIO",
-	MemoryAreaWWordFs:   "WR",
-	MemoryAreaHWordFs:   "HR",
-	MemoryAreaTBit:      "TIM",
-	MemoryAreaCBit:      "CNT",
-	MemoryAreaTBitFs:    "TIM",
-	MemoryAreaCBitFs:    "CNT",
-	MemoryAreaTWord:     "TIM",
-	MemoryAreaCWord:     "CNT",
-	MemoryAreaDBit:      "DM",
-	MemoryAreaDWord:     "DM",
-	MemoryAreaIR:        "IR",
-	MemoryAreaDR:        "DR",
+	MemoryAreaWRWordFs:  "WR",
+	MemoryAreaHRWordFs:  "HR",
+	MemoryAreaTIMCF:     "TIM",
+	MemoryAreaCNTCF:     "CNT",
+	MemoryAreaTIMCFFs:   "TIM",
+	MemoryAreaCNTCFFs:   "CNT",
+	MemoryAreaTIMPV:     "TIM",
+	MemoryAreaCNTPV:     "CNT",
+	MemoryAreaDMBit:     "DM",
+	MemoryAreaDMWord:    "DM",
+	MemoryAreaIRPV:      "IR",
+	MemoryAreaDRPV:      "DR",
 }
 
 // AreaName is the attribute of MemoryArea.
@@ -379,34 +401,34 @@ func (x MemoryArea) AreaName() string {
 	if v, ok := _MemoryAreaMapAreaName[x]; ok {
 		return v
 	}
-	return fmt.Sprintf("MemoryArea(%d).AreaName", x)
+	return fmt.Sprintf("MemoryArea(%s).AreaName", string(x))
 }
 
 var _MemoryAreaMapDataType = map[MemoryArea]string{
 	MemoryAreaCIOBit:    "Bit",
-	MemoryAreaWBit:      "Bit",
-	MemoryAreaHBit:      "Bit",
-	MemoryAreaABit:      "Bit",
+	MemoryAreaWRBit:     "Bit",
+	MemoryAreaHRBit:     "Bit",
+	MemoryAreaARBit:     "Bit",
 	MemoryAreaCIOBitFs:  "BitFs",
-	MemoryAreaWBitFs:    "BitFs",
-	MemoryAreaHBitFs:    "BitFs",
+	MemoryAreaWRBitFs:   "BitFs",
+	MemoryAreaHRBitFs:   "BitFs",
 	MemoryAreaCIOWord:   "Word",
-	MemoryAreaWWord:     "Word",
-	MemoryAreaHWord:     "Word",
-	MemoryAreaAWord:     "Word",
+	MemoryAreaWRWord:    "Word",
+	MemoryAreaHRWord:    "Word",
+	MemoryAreaARWord:    "Word",
 	MemoryAreaCIOWordFs: "WordFs",
-	MemoryAreaWWordFs:   "WordFs",
-	MemoryAreaHWordFs:   "WordFs",
-	MemoryAreaTBit:      "CF",
-	MemoryAreaCBit:      "CF",
-	MemoryAreaTBitFs:    "CFFs",
-	MemoryAreaCBitFs:    "CFFs",
-	MemoryAreaTWord:     "PV",
-	MemoryAreaCWord:     "PV",
-	MemoryAreaDBit:      "Bit",
-	MemoryAreaDWord:     "Word",
-	MemoryAreaIR:        "PV",
-	MemoryAreaDR:        "PV",
+	MemoryAreaWRWordFs:  "WordFs",
+	MemoryAreaHRWordFs:  "WordFs",
+	MemoryAreaTIMCF:     "CF",
+	MemoryAreaCNTCF:     "CF",
+	MemoryAreaTIMCFFs:   "CFFs",
+	MemoryAreaCNTCFFs:   "CFFs",
+	MemoryAreaTIMPV:     "PV",
+	MemoryAreaCNTPV:     "PV",
+	MemoryAreaDMBit:     "Bit",
+	MemoryAreaDMWord:    "Word",
+	MemoryAreaIRPV:      "PV",
+	MemoryAreaDRPV:      "PV",
 }
 
 // DataType is the attribute of MemoryArea.
@@ -414,34 +436,34 @@ func (x MemoryArea) DataType() string {
 	if v, ok := _MemoryAreaMapDataType[x]; ok {
 		return v
 	}
-	return fmt.Sprintf("MemoryArea(%d).DataType", x)
+	return fmt.Sprintf("MemoryArea(%s).DataType", string(x))
 }
 
 var _MemoryAreaMapCode = map[MemoryArea]uint8{
 	MemoryAreaCIOBit:    48,
-	MemoryAreaWBit:      49,
-	MemoryAreaHBit:      50,
-	MemoryAreaABit:      51,
+	MemoryAreaWRBit:     49,
+	MemoryAreaHRBit:     50,
+	MemoryAreaARBit:     51,
 	MemoryAreaCIOBitFs:  112,
-	MemoryAreaWBitFs:    113,
-	MemoryAreaHBitFs:    114,
+	MemoryAreaWRBitFs:   113,
+	MemoryAreaHRBitFs:   114,
 	MemoryAreaCIOWord:   176,
-	MemoryAreaWWord:     177,
-	MemoryAreaHWord:     178,
-	MemoryAreaAWord:     179,
+	MemoryAreaWRWord:    177,
+	MemoryAreaHRWord:    178,
+	MemoryAreaARWord:    179,
 	MemoryAreaCIOWordFs: 240,
-	MemoryAreaWWordFs:   241,
-	MemoryAreaHWordFs:   242,
-	MemoryAreaTBit:      9,
-	MemoryAreaCBit:      9,
-	MemoryAreaTBitFs:    73,
-	MemoryAreaCBitFs:    73,
-	MemoryAreaTWord:     137,
-	MemoryAreaCWord:     137,
-	MemoryAreaDBit:      2,
-	MemoryAreaDWord:     130,
-	MemoryAreaIR:        220,
-	MemoryAreaDR:        188,
+	MemoryAreaWRWordFs:  241,
+	MemoryAreaHRWordFs:  242,
+	MemoryAreaTIMCF:     9,
+	MemoryAreaCNTCF:     9,
+	MemoryAreaTIMCFFs:   73,
+	MemoryAreaCNTCFFs:   73,
+	MemoryAreaTIMPV:     137,
+	MemoryAreaCNTPV:     137,
+	MemoryAreaDMBit:     2,
+	MemoryAreaDMWord:    130,
+	MemoryAreaIRPV:      220,
+	MemoryAreaDRPV:      188,
 }
 
 // Code is the attribute of MemoryArea.
@@ -454,29 +476,29 @@ func (x MemoryArea) Code() uint8 {
 
 var _MemoryAreaMapMax = map[MemoryArea]uint16{
 	MemoryAreaCIOBit:    6143,
-	MemoryAreaWBit:      511,
-	MemoryAreaHBit:      511,
-	MemoryAreaABit:      959,
+	MemoryAreaWRBit:     511,
+	MemoryAreaHRBit:     511,
+	MemoryAreaARBit:     959,
 	MemoryAreaCIOBitFs:  6143,
-	MemoryAreaWBitFs:    511,
-	MemoryAreaHBitFs:    511,
+	MemoryAreaWRBitFs:   511,
+	MemoryAreaHRBitFs:   511,
 	MemoryAreaCIOWord:   6143,
-	MemoryAreaWWord:     511,
-	MemoryAreaHWord:     511,
-	MemoryAreaAWord:     959,
+	MemoryAreaWRWord:    511,
+	MemoryAreaHRWord:    511,
+	MemoryAreaARWord:    959,
 	MemoryAreaCIOWordFs: 6143,
-	MemoryAreaWWordFs:   511,
-	MemoryAreaHWordFs:   511,
-	MemoryAreaTBit:      4095,
-	MemoryAreaCBit:      4095,
-	MemoryAreaTBitFs:    4095,
-	MemoryAreaCBitFs:    4095,
-	MemoryAreaTWord:     4095,
-	MemoryAreaCWord:     4095,
-	MemoryAreaDBit:      32767,
-	MemoryAreaDWord:     32767,
-	MemoryAreaIR:        15,
-	MemoryAreaDR:        15,
+	MemoryAreaWRWordFs:  511,
+	MemoryAreaHRWordFs:  511,
+	MemoryAreaTIMCF:     4095,
+	MemoryAreaCNTCF:     4095,
+	MemoryAreaTIMCFFs:   4095,
+	MemoryAreaCNTCFFs:   4095,
+	MemoryAreaTIMPV:     4095,
+	MemoryAreaCNTPV:     4095,
+	MemoryAreaDMBit:     32767,
+	MemoryAreaDMWord:    32767,
+	MemoryAreaIRPV:      15,
+	MemoryAreaDRPV:      15,
 }
 
 // Max is the attribute of MemoryArea.
@@ -489,29 +511,29 @@ func (x MemoryArea) Max() uint16 {
 
 var _MemoryAreaMapOffset = map[MemoryArea]uint16{
 	MemoryAreaCIOBit:    0,
-	MemoryAreaWBit:      0,
-	MemoryAreaHBit:      0,
-	MemoryAreaABit:      0,
+	MemoryAreaWRBit:     0,
+	MemoryAreaHRBit:     0,
+	MemoryAreaARBit:     0,
 	MemoryAreaCIOBitFs:  0,
-	MemoryAreaWBitFs:    0,
-	MemoryAreaHBitFs:    0,
+	MemoryAreaWRBitFs:   0,
+	MemoryAreaHRBitFs:   0,
 	MemoryAreaCIOWord:   0,
-	MemoryAreaWWord:     0,
-	MemoryAreaHWord:     0,
-	MemoryAreaAWord:     0,
+	MemoryAreaWRWord:    0,
+	MemoryAreaHRWord:    0,
+	MemoryAreaARWord:    0,
 	MemoryAreaCIOWordFs: 0,
-	MemoryAreaWWordFs:   0,
-	MemoryAreaHWordFs:   0,
-	MemoryAreaTBit:      0,
-	MemoryAreaCBit:      32768,
-	MemoryAreaTBitFs:    0,
-	MemoryAreaCBitFs:    32768,
-	MemoryAreaTWord:     0,
-	MemoryAreaCWord:     32768,
-	MemoryAreaDBit:      0,
-	MemoryAreaDWord:     0,
-	MemoryAreaIR:        256,
-	MemoryAreaDR:        512,
+	MemoryAreaWRWordFs:  0,
+	MemoryAreaHRWordFs:  0,
+	MemoryAreaTIMCF:     0,
+	MemoryAreaCNTCF:     32768,
+	MemoryAreaTIMCFFs:   0,
+	MemoryAreaCNTCFFs:   32768,
+	MemoryAreaTIMPV:     0,
+	MemoryAreaCNTPV:     32768,
+	MemoryAreaDMBit:     0,
+	MemoryAreaDMWord:    0,
+	MemoryAreaIRPV:      256,
+	MemoryAreaDRPV:      512,
 }
 
 // Offset is the attribute of MemoryArea.
@@ -524,29 +546,29 @@ func (x MemoryArea) Offset() uint16 {
 
 var _MemoryAreaMapOldCode = map[MemoryArea]uint8{
 	MemoryAreaCIOBit:    0,
-	MemoryAreaWBit:      0,
-	MemoryAreaHBit:      0,
-	MemoryAreaABit:      0,
+	MemoryAreaWRBit:     0,
+	MemoryAreaHRBit:     0,
+	MemoryAreaARBit:     0,
 	MemoryAreaCIOBitFs:  64,
-	MemoryAreaWBitFs:    0,
-	MemoryAreaHBitFs:    0,
+	MemoryAreaWRBitFs:   0,
+	MemoryAreaHRBitFs:   0,
 	MemoryAreaCIOWord:   128,
-	MemoryAreaWWord:     0,
-	MemoryAreaHWord:     0,
-	MemoryAreaAWord:     128,
+	MemoryAreaWRWord:    0,
+	MemoryAreaHRWord:    0,
+	MemoryAreaARWord:    128,
 	MemoryAreaCIOWordFs: 192,
-	MemoryAreaWWordFs:   0,
-	MemoryAreaHWordFs:   0,
-	MemoryAreaTBit:      1,
-	MemoryAreaCBit:      1,
-	MemoryAreaTBitFs:    65,
-	MemoryAreaCBitFs:    65,
-	MemoryAreaTWord:     129,
-	MemoryAreaCWord:     129,
-	MemoryAreaDBit:      0,
-	MemoryAreaDWord:     130,
-	MemoryAreaIR:        0,
-	MemoryAreaDR:        156,
+	MemoryAreaWRWordFs:  0,
+	MemoryAreaHRWordFs:  0,
+	MemoryAreaTIMCF:     1,
+	MemoryAreaCNTCF:     1,
+	MemoryAreaTIMCFFs:   65,
+	MemoryAreaCNTCFFs:   65,
+	MemoryAreaTIMPV:     129,
+	MemoryAreaCNTPV:     129,
+	MemoryAreaDMBit:     0,
+	MemoryAreaDMWord:    130,
+	MemoryAreaIRPV:      0,
+	MemoryAreaDRPV:      156,
 }
 
 // OldCode is the attribute of MemoryArea.
@@ -559,29 +581,29 @@ func (x MemoryArea) OldCode() uint8 {
 
 var _MemoryAreaMapOldMax = map[MemoryArea]uint16{
 	MemoryAreaCIOBit:    2555,
-	MemoryAreaWBit:      65535,
-	MemoryAreaHBit:      65535,
-	MemoryAreaABit:      959,
+	MemoryAreaWRBit:     65535,
+	MemoryAreaHRBit:     65535,
+	MemoryAreaARBit:     959,
 	MemoryAreaCIOBitFs:  2555,
-	MemoryAreaWBitFs:    65535,
-	MemoryAreaHBitFs:    65535,
+	MemoryAreaWRBitFs:   65535,
+	MemoryAreaHRBitFs:   65535,
 	MemoryAreaCIOWord:   2555,
-	MemoryAreaWWord:     65535,
-	MemoryAreaHWord:     65535,
-	MemoryAreaAWord:     959,
+	MemoryAreaWRWord:    65535,
+	MemoryAreaHRWord:    65535,
+	MemoryAreaARWord:    959,
 	MemoryAreaCIOWordFs: 2555,
-	MemoryAreaWWordFs:   65535,
-	MemoryAreaHWordFs:   65535,
-	MemoryAreaTBit:      2047,
-	MemoryAreaCBit:      2047,
-	MemoryAreaTBitFs:    2047,
-	MemoryAreaCBitFs:    2047,
-	MemoryAreaTWord:     2047,
-	MemoryAreaCWord:     2047,
-	MemoryAreaDBit:      65535,
-	MemoryAreaDWord:     32767,
-	MemoryAreaIR:        65535,
-	MemoryAreaDR:        2,
+	MemoryAreaWRWordFs:  65535,
+	MemoryAreaHRWordFs:  65535,
+	MemoryAreaTIMCF:     2047,
+	MemoryAreaCNTCF:     2047,
+	MemoryAreaTIMCFFs:   2047,
+	MemoryAreaCNTCFFs:   2047,
+	MemoryAreaTIMPV:     2047,
+	MemoryAreaCNTPV:     2047,
+	MemoryAreaDMBit:     65535,
+	MemoryAreaDMWord:    32767,
+	MemoryAreaIRPV:      65535,
+	MemoryAreaDRPV:      2,
 }
 
 // OldMax is the attribute of MemoryArea.
@@ -594,29 +616,29 @@ func (x MemoryArea) OldMax() uint16 {
 
 var _MemoryAreaMapOldOffset = map[MemoryArea]uint16{
 	MemoryAreaCIOBit:    0,
-	MemoryAreaWBit:      65535,
-	MemoryAreaHBit:      65535,
-	MemoryAreaABit:      2816,
+	MemoryAreaWRBit:     65535,
+	MemoryAreaHRBit:     65535,
+	MemoryAreaARBit:     2816,
 	MemoryAreaCIOBitFs:  0,
-	MemoryAreaWBitFs:    65535,
-	MemoryAreaHBitFs:    65535,
+	MemoryAreaWRBitFs:   65535,
+	MemoryAreaHRBitFs:   65535,
 	MemoryAreaCIOWord:   0,
-	MemoryAreaWWord:     65535,
-	MemoryAreaHWord:     65535,
-	MemoryAreaAWord:     2816,
+	MemoryAreaWRWord:    65535,
+	MemoryAreaHRWord:    65535,
+	MemoryAreaARWord:    2816,
 	MemoryAreaCIOWordFs: 0,
-	MemoryAreaWWordFs:   65535,
-	MemoryAreaHWordFs:   65535,
-	MemoryAreaTBit:      0,
-	MemoryAreaCBit:      2048,
-	MemoryAreaTBitFs:    0,
-	MemoryAreaCBitFs:    2048,
-	MemoryAreaTWord:     0,
-	MemoryAreaCWord:     2048,
-	MemoryAreaDBit:      65535,
-	MemoryAreaDWord:     0,
-	MemoryAreaIR:        65535,
-	MemoryAreaDR:        3,
+	MemoryAreaWRWordFs:  65535,
+	MemoryAreaHRWordFs:  65535,
+	MemoryAreaTIMCF:     0,
+	MemoryAreaCNTCF:     2048,
+	MemoryAreaTIMCFFs:   0,
+	MemoryAreaCNTCFFs:   2048,
+	MemoryAreaTIMPV:     0,
+	MemoryAreaCNTPV:     2048,
+	MemoryAreaDMBit:     65535,
+	MemoryAreaDMWord:    0,
+	MemoryAreaIRPV:      65535,
+	MemoryAreaDRPV:      3,
 }
 
 // OldOffset is the attribute of MemoryArea.
@@ -629,29 +651,29 @@ func (x MemoryArea) OldOffset() uint16 {
 
 var _MemoryAreaMapSize = map[MemoryArea]int{
 	MemoryAreaCIOBit:    1,
-	MemoryAreaWBit:      1,
-	MemoryAreaHBit:      1,
-	MemoryAreaABit:      1,
+	MemoryAreaWRBit:     1,
+	MemoryAreaHRBit:     1,
+	MemoryAreaARBit:     1,
 	MemoryAreaCIOBitFs:  1,
-	MemoryAreaWBitFs:    1,
-	MemoryAreaHBitFs:    1,
+	MemoryAreaWRBitFs:   1,
+	MemoryAreaHRBitFs:   1,
 	MemoryAreaCIOWord:   2,
-	MemoryAreaWWord:     2,
-	MemoryAreaHWord:     2,
-	MemoryAreaAWord:     2,
+	MemoryAreaWRWord:    2,
+	MemoryAreaHRWord:    2,
+	MemoryAreaARWord:    2,
 	MemoryAreaCIOWordFs: 4,
-	MemoryAreaWWordFs:   4,
-	MemoryAreaHWordFs:   4,
-	MemoryAreaTBit:      1,
-	MemoryAreaCBit:      1,
-	MemoryAreaTBitFs:    1,
-	MemoryAreaCBitFs:    1,
-	MemoryAreaTWord:     2,
-	MemoryAreaCWord:     2,
-	MemoryAreaDBit:      1,
-	MemoryAreaDWord:     2,
-	MemoryAreaIR:        4,
-	MemoryAreaDR:        2,
+	MemoryAreaWRWordFs:  4,
+	MemoryAreaHRWordFs:  4,
+	MemoryAreaTIMCF:     1,
+	MemoryAreaCNTCF:     1,
+	MemoryAreaTIMCFFs:   1,
+	MemoryAreaCNTCFFs:   1,
+	MemoryAreaTIMPV:     2,
+	MemoryAreaCNTPV:     2,
+	MemoryAreaDMBit:     1,
+	MemoryAreaDMWord:    2,
+	MemoryAreaIRPV:      4,
+	MemoryAreaDRPV:      2,
 }
 
 // Size is the attribute of MemoryArea.
@@ -663,14 +685,14 @@ func (x MemoryArea) Size() int {
 }
 
 // Val is the attribute of MemoryArea.
-func (x MemoryArea) Val() uint8 {
-	return uint8(x)
+func (x MemoryArea) Val() string {
+	return string(x)
 }
 
 // IsValid provides a quick way to determine if the typed value is
 // part of the allowed enumerated values
 func (x MemoryArea) IsValid() bool {
-	_, ok := _MemoryAreaMapName[x]
+	_, ok := _MemoryAreaNameMap[string(x)]
 	return ok
 }
 
@@ -679,39 +701,24 @@ func (x MemoryArea) String() string {
 	return x.Name()
 }
 
-var _MemoryAreaNameMap = map[string]MemoryArea{
-	_MemoryAreaName[0:6]:     MemoryAreaCIOBit,
-	_MemoryAreaName[6:10]:    MemoryAreaWBit,
-	_MemoryAreaName[10:14]:   MemoryAreaHBit,
-	_MemoryAreaName[14:18]:   MemoryAreaABit,
-	_MemoryAreaName[18:26]:   MemoryAreaCIOBitFs,
-	_MemoryAreaName[26:32]:   MemoryAreaWBitFs,
-	_MemoryAreaName[32:38]:   MemoryAreaHBitFs,
-	_MemoryAreaName[38:45]:   MemoryAreaCIOWord,
-	_MemoryAreaName[45:50]:   MemoryAreaWWord,
-	_MemoryAreaName[50:55]:   MemoryAreaHWord,
-	_MemoryAreaName[55:60]:   MemoryAreaAWord,
-	_MemoryAreaName[60:69]:   MemoryAreaCIOWordFs,
-	_MemoryAreaName[69:76]:   MemoryAreaWWordFs,
-	_MemoryAreaName[76:83]:   MemoryAreaHWordFs,
-	_MemoryAreaName[83:87]:   MemoryAreaTBit,
-	_MemoryAreaName[87:91]:   MemoryAreaCBit,
-	_MemoryAreaName[91:97]:   MemoryAreaTBitFs,
-	_MemoryAreaName[97:103]:  MemoryAreaCBitFs,
-	_MemoryAreaName[103:108]: MemoryAreaTWord,
-	_MemoryAreaName[108:113]: MemoryAreaCWord,
-	_MemoryAreaName[113:117]: MemoryAreaDBit,
-	_MemoryAreaName[117:122]: MemoryAreaDWord,
-	_MemoryAreaName[122:124]: MemoryAreaIR,
-	_MemoryAreaName[124:126]: MemoryAreaDR,
-}
-
 // ParseMemoryArea converts a string to a MemoryArea.
 func ParseMemoryArea(value string) (MemoryArea, error) {
 	if x, ok := _MemoryAreaNameMap[value]; ok {
 		return x, nil
 	}
-	return MemoryArea(0), fmt.Errorf("%s is %w", value, ErrInvalidMemoryArea)
+	if x, ok := _MemoryAreaNameMap[strings.ToLower(value)]; ok {
+		return x, nil
+	}
+	return "", fmt.Errorf("%s is %w", value, ErrInvalidMemoryArea)
+}
+
+// MustParseMemoryArea converts a string to a MemoryArea, and panics if is not valid.
+func MustParseMemoryArea(value string) MemoryArea {
+	val, err := ParseMemoryArea(value)
+	if err != nil {
+		panic(err)
+	}
+	return val
 }
 
 var ErrInvalidPlcType = errors.New("not a valid PlcType")
