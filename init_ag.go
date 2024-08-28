@@ -7,6 +7,28 @@ package fins
 import (
 	"errors"
 	"fmt"
+	"strings"
+)
+
+const (
+	// AreaCIO is an Area of type CIO.
+	AreaCIO Area = "CIO"
+	// AreaWR is an Area of type WR.
+	AreaWR Area = "WR"
+	// AreaHR is an Area of type HR.
+	AreaHR Area = "HR"
+	// AreaAR is an Area of type AR.
+	AreaAR Area = "AR"
+	// AreaTIM is an Area of type TIM.
+	AreaTIM Area = "TIM"
+	// AreaCNT is an Area of type CNT.
+	AreaCNT Area = "CNT"
+	// AreaDM is an Area of type DM.
+	AreaDM Area = "DM"
+	// AreaIR is an Area of type IR.
+	AreaIR Area = "IR"
+	// AreaDR is an Area of type DR.
+	AreaDR Area = "DR"
 )
 
 const (
@@ -96,6 +118,65 @@ const (
 	// PlcTypeOld is a PlcType of type Old.
 	PlcTypeOld
 )
+
+var ErrInvalidArea = errors.New("not a valid Area")
+
+var _AreaNameMap = map[string]Area{
+	"CIO": AreaCIO,
+	"cio": AreaCIO,
+	"WR":  AreaWR,
+	"wr":  AreaWR,
+	"HR":  AreaHR,
+	"hr":  AreaHR,
+	"AR":  AreaAR,
+	"ar":  AreaAR,
+	"TIM": AreaTIM,
+	"tim": AreaTIM,
+	"CNT": AreaCNT,
+	"cnt": AreaCNT,
+	"DM":  AreaDM,
+	"dm":  AreaDM,
+	"IR":  AreaIR,
+	"ir":  AreaIR,
+	"DR":  AreaDR,
+	"dr":  AreaDR,
+}
+
+// Name is the attribute of Area.
+func (x Area) Name() string {
+	if v, ok := _AreaNameMap[string(x)]; ok {
+		return string(v)
+	}
+	return fmt.Sprintf("Area(%s).Name", string(x))
+}
+
+// Val is the attribute of Area.
+func (x Area) Val() string {
+	return string(x)
+}
+
+// IsValid provides a quick way to determine if the typed value is
+// part of the allowed enumerated values
+func (x Area) IsValid() bool {
+	_, ok := _AreaNameMap[string(x)]
+	return ok
+}
+
+// String implements the Stringer interface.
+func (x Area) String() string {
+	return x.Name()
+}
+
+// ParseArea converts a string to an Area.
+func ParseArea(value string) (Area, error) {
+	if x, ok := _AreaNameMap[value]; ok {
+		return x, nil
+	}
+	if x, ok := _AreaNameMap[strings.ToLower(value)]; ok {
+		return x, nil
+	}
+	return "", fmt.Errorf("%s is %w", value, ErrInvalidArea)
+}
 
 var ErrInvalidCommand = errors.New("not a valid Command")
 

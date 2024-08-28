@@ -29,6 +29,24 @@ DataType
 type DataType string
 
 /*
+Area
+
+	@EnumConfig(NoCamel, NoCase)
+	@Enum {
+		CIO
+		WR
+		HR
+		AR
+		TIM
+		CNT
+		DM
+		IR
+		DR
+	}
+*/
+type Area string
+
+/*
 MemoryArea word is big end
 
 	@EnumConfig(NoCamel)
