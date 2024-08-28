@@ -16,3 +16,5 @@ type Fins interface {
 	Write(address *FinAddress, values []*FinValue) error
 	RandomRead(addresses []*FinAddress) ([]*FinValue, error)
 }
+
+type fins struct{}
