@@ -1,6 +1,9 @@
 package fins
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type EndCode [2]byte
 
@@ -55,11 +58,11 @@ MC
 */
 type MC byte
 
-var errorsMap = map[MC]map[byte]string{
-	MCNormalCompletion: {
+var errorsMap = map[byte]map[byte]string{
+	MCNormalCompletion.Val(): {
 		0x01: "Service canceled",
 	},
-	MCLocalNodeError: {
+	MCLocalNodeError.Val(): {
 		0x01: "Local node not in network",
 		0x02: "Token timeout",
 		0x03: "Retries failed",
@@ -67,37 +70,37 @@ var errorsMap = map[MC]map[byte]string{
 		0x05: "Node address range error",
 		0x06: "Node address duplication",
 	},
-	MCDestinationNodeError: {
+	MCDestinationNodeError.Val(): {
 		0x01: "Destination node not in network",
 		0x02: "Unit missing",
 		0x03: "Third node missing",
 		0x04: "Destination node busy",
 		0x05: "Response timeout",
 	},
-	MCControllerError: {
+	MCControllerError.Val(): {
 		0x01: "Communications controller error",
 		0x02: "CPU Unit error",
 		0x03: "Controller error",
 		0x04: "Unit number error",
 	},
-	MCServiceUnsupported: {
+	MCServiceUnsupported.Val(): {
 		0x01: "Undefined command",
 		0x02: "Not supported by model/version",
 	},
-	MCRoutingTableError: {
+	MCRoutingTableError.Val(): {
 		0x01: "Destination address setting error",
 		0x02: "No routing tables",
 		0x03: "Routing table error",
 		0x04: "Too many relays",
 	},
-	MCCommandFormatError: {
+	MCCommandFormatError.Val(): {
 		0x01: "Command too long",
 		0x02: "Command too short",
 		0x03: "Elements/data don’t match",
 		0x04: "Command format error",
 		0x05: "Header error",
 	},
-	MCParameterError: {
+	MCParameterError.Val(): {
 		0x01: "Area classification missing",
 		0x02: "Access size error",
 		0x03: "Address range error",
@@ -108,7 +111,7 @@ var errorsMap = map[MC]map[byte]string{
 		0x0B: "Response too long",
 		0x0C: "Parameter error",
 	},
-	MCReadNotPossible: {
+	MCReadNotPossible.Val(): {
 		0x02: "Protected",
 		0x03: "Table missing",
 		0x04: "Data missing",
@@ -116,7 +119,7 @@ var errorsMap = map[MC]map[byte]string{
 		0x06: "File missing",
 		0x07: "Data mismatch",
 	},
-	MCWriteNotPossible: {
+	MCWriteNotPossible.Val(): {
 		0x01: "Read-only",
 		0x02: "Protected: Cannot write data link table",
 		0x03: "Cannot register",
@@ -125,7 +128,7 @@ var errorsMap = map[MC]map[byte]string{
 		0x07: "File name already exists",
 		0x08: "Cannot change",
 	},
-	MCNotExecutableInCurrentMode: {
+	MCNotExecutableInCurrentMode.Val(): {
 		0x01: "Not possible during execution",
 		0x02: "Not possible while running",
 		0x03: "Wrong PLC mode, The PLC is in PROGRAM mode.",
@@ -135,15 +138,15 @@ var errorsMap = map[MC]map[byte]string{
 		0x07: "Specified node not polling node",
 		0x08: "Step cannot be executed",
 	},
-	MCNoSuchDevice: {
+	MCNoSuchDevice.Val(): {
 		0x01: "File device missing",
 		0x02: "Memory missing",
 		0x03: "Clock missing",
 	},
-	MCCannotStartStop: {
+	MCCannotStartStop.Val(): {
 		0x01: "Table missing",
 	},
-	MCUnitError: {
+	MCUnitError.Val(): {
 		0x02: "Memory error",
 		0x03: "I/O setting error",
 		0x04: "Too many I/O points",
@@ -156,7 +159,7 @@ var errorsMap = map[MC]map[byte]string{
 		0x0F: "Memory error",
 		0x10: "SYSMAC BUS terminator missing",
 	},
-	MCCommandError: {
+	MCCommandError.Val(): {
 		0x01: "No protection",
 		0x02: "Incorrect password",
 		0x04: "Protected",
@@ -168,10 +171,10 @@ var errorsMap = map[MC]map[byte]string{
 		0x0A: "Number already defined",
 		0x0B: "Error will not clear",
 	},
-	MCAccessRightError: {
+	MCAccessRightError.Val(): {
 		0x01: "No access right",
 	},
-	MCAbort: {
+	MCAbort.Val(): {
 		0x01: "Service aborted",
 	},
 }
@@ -193,5 +196,11 @@ func (e EndCode) Error() error {
 		return NonFatalCpuUnitError
 	}
 
-	return nil
+	if subMap, ok := errorsMap[e.MainCode()]; ok {
+		if errStr, ok1 := subMap[e.SubCode()]; ok1 {
+			return errors.New(errStr)
+		}
+	}
+
+	return fmt.Errorf("unknown end-code 0x%02x:0x%02x", e.MainCode(), e.SubCode())
 }
