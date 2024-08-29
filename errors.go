@@ -168,6 +168,12 @@ var errorsMap = map[MC]map[byte]string{
 		0x0A: "Number already defined",
 		0x0B: "Error will not clear",
 	},
+	MCAccessRightError: {
+		0x01: "No access right",
+	},
+	MCAbort: {
+		0x01: "Service aborted",
+	},
 }
 
 func (e EndCode) Error() error {
