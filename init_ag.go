@@ -62,6 +62,43 @@ const (
 )
 
 const (
+	// MCNormalCompletion is a MC of type NormalCompletion.
+	MCNormalCompletion MC = 0
+	// MCLocalNodeError is a MC of type LocalNodeError.
+	MCLocalNodeError MC = 1
+	// MCDestinationNodeError is a MC of type DestinationNodeError.
+	MCDestinationNodeError MC = 2
+	// MCControllerError is a MC of type ControllerError.
+	MCControllerError MC = 3
+	// MCServiceUnsupported is a MC of type ServiceUnsupported.
+	MCServiceUnsupported MC = 4
+	// MCRoutingTableError is a MC of type RoutingTableError.
+	MCRoutingTableError MC = 5
+	// MCCommandFormatError is a MC of type CommandFormatError.
+	MCCommandFormatError MC = 16
+	// MCParameterError is a MC of type ParameterError.
+	MCParameterError MC = 17
+	// MCReadNotPossible is a MC of type ReadNotPossible.
+	MCReadNotPossible MC = 32
+	// MCWriteNotPossible is a MC of type WriteNotPossible.
+	MCWriteNotPossible MC = 33
+	// MCNotExecutableInCurrentMode is a MC of type NotExecutableInCurrentMode.
+	MCNotExecutableInCurrentMode MC = 34
+	// MCNoSuchDevice is a MC of type NoSuchDevice.
+	MCNoSuchDevice MC = 35
+	// MCCannotStartStop is a MC of type CannotStartStop.
+	MCCannotStartStop MC = 36
+	// MCUnitError is a MC of type UnitError.
+	MCUnitError MC = 37
+	// MCCommandError is a MC of type CommandError.
+	MCCommandError MC = 38
+	// MCAccessRightError is a MC of type AccessRightError.
+	MCAccessRightError MC = 48
+	// MCAbort is a MC of type Abort.
+	MCAbort MC = 64
+)
+
+const (
 	// MemoryAreaCIOBit is a MemoryArea of type CIOBit.
 	MemoryAreaCIOBit MemoryArea = "CIOBit" // CIO Area Bit
 	// MemoryAreaWRBit is a MemoryArea of type WRBit.
@@ -306,6 +343,83 @@ func ParseDataType(value string) (DataType, error) {
 		return x, nil
 	}
 	return "", fmt.Errorf("%s is %w", value, ErrInvalidDataType)
+}
+
+var ErrInvalidMC = errors.New("not a valid MC")
+
+var _MCName = "NormalCompletionLocalNodeErrorDestinationNodeErrorControllerErrorServiceUnsupportedRoutingTableErrorCommandFormatErrorParameterErrorReadNotPossibleWriteNotPossibleNotExecutableInCurrentModeNoSuchDeviceCannotStartStopUnitErrorCommandErrorAccessRightErrorAbort"
+
+var _MCMapName = map[MC]string{
+	MCNormalCompletion:           _MCName[0:16],
+	MCLocalNodeError:             _MCName[16:30],
+	MCDestinationNodeError:       _MCName[30:50],
+	MCControllerError:            _MCName[50:65],
+	MCServiceUnsupported:         _MCName[65:83],
+	MCRoutingTableError:          _MCName[83:100],
+	MCCommandFormatError:         _MCName[100:118],
+	MCParameterError:             _MCName[118:132],
+	MCReadNotPossible:            _MCName[132:147],
+	MCWriteNotPossible:           _MCName[147:163],
+	MCNotExecutableInCurrentMode: _MCName[163:189],
+	MCNoSuchDevice:               _MCName[189:201],
+	MCCannotStartStop:            _MCName[201:216],
+	MCUnitError:                  _MCName[216:225],
+	MCCommandError:               _MCName[225:237],
+	MCAccessRightError:           _MCName[237:253],
+	MCAbort:                      _MCName[253:258],
+}
+
+// Name is the attribute of MC.
+func (x MC) Name() string {
+	if v, ok := _MCMapName[x]; ok {
+		return v
+	}
+	return fmt.Sprintf("MC(%d).Name", x)
+}
+
+// Val is the attribute of MC.
+func (x MC) Val() uint8 {
+	return uint8(x)
+}
+
+// IsValid provides a quick way to determine if the typed value is
+// part of the allowed enumerated values
+func (x MC) IsValid() bool {
+	_, ok := _MCMapName[x]
+	return ok
+}
+
+// String implements the Stringer interface.
+func (x MC) String() string {
+	return x.Name()
+}
+
+var _MCNameMap = map[string]MC{
+	_MCName[0:16]:    MCNormalCompletion,
+	_MCName[16:30]:   MCLocalNodeError,
+	_MCName[30:50]:   MCDestinationNodeError,
+	_MCName[50:65]:   MCControllerError,
+	_MCName[65:83]:   MCServiceUnsupported,
+	_MCName[83:100]:  MCRoutingTableError,
+	_MCName[100:118]: MCCommandFormatError,
+	_MCName[118:132]: MCParameterError,
+	_MCName[132:147]: MCReadNotPossible,
+	_MCName[147:163]: MCWriteNotPossible,
+	_MCName[163:189]: MCNotExecutableInCurrentMode,
+	_MCName[189:201]: MCNoSuchDevice,
+	_MCName[201:216]: MCCannotStartStop,
+	_MCName[216:225]: MCUnitError,
+	_MCName[225:237]: MCCommandError,
+	_MCName[237:253]: MCAccessRightError,
+	_MCName[253:258]: MCAbort,
+}
+
+// ParseMC converts a string to a MC.
+func ParseMC(value string) (MC, error) {
+	if x, ok := _MCNameMap[value]; ok {
+		return x, nil
+	}
+	return MC(0), fmt.Errorf("%s is %w", value, ErrInvalidMC)
 }
 
 var ErrInvalidMemoryArea = errors.New("not a valid MemoryArea")

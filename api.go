@@ -17,4 +17,17 @@ type Fins interface {
 	RandomRead(addresses []*FinAddress) ([]*FinValue, error)
 }
 
-type fins struct{}
+type fins struct {
+}
+
+func (f *fins) Read(address *FinAddress, length uint16) ([]*FinValue, error) {
+	return nil, nil
+}
+
+func (f *fins) Write(address *FinAddress, values []*FinValue) error {
+	return nil
+}
+
+func (f *fins) RandomRead(addresses []*FinAddress) ([]*FinValue, error) {
+	return nil, nil
+}
