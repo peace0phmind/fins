@@ -135,6 +135,39 @@ var errorsMap = map[MC]map[byte]string{
 		0x07: "Specified node not polling node",
 		0x08: "Step cannot be executed",
 	},
+	MCNoSuchDevice: {
+		0x01: "File device missing",
+		0x02: "Memory missing",
+		0x03: "Clock missing",
+	},
+	MCCannotStartStop: {
+		0x01: "Table missing",
+	},
+	MCUnitError: {
+		0x02: "Memory error",
+		0x03: "I/O setting error",
+		0x04: "Too many I/O points",
+		0x05: "CPU bus error",
+		0x06: "I/O duplication",
+		0x07: "I/O bus error",
+		0x09: "SYSMAC BUS/2 error",
+		0x0A: "CPU Bus Unit error",
+		0x0D: "SYSMAC BUS No. duplication",
+		0x0F: "Memory error",
+		0x10: "SYSMAC BUS terminator missing",
+	},
+	MCCommandError: {
+		0x01: "No protection",
+		0x02: "Incorrect password",
+		0x04: "Protected",
+		0x05: "Service already executing",
+		0x06: "Service stopped",
+		0x07: "No execution right",
+		0x08: "Settings not complete",
+		0x09: "Necessary items not set",
+		0x0A: "Number already defined",
+		0x0B: "Error will not clear",
+	},
 }
 
 func (e EndCode) Error() error {
