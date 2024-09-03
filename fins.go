@@ -33,6 +33,26 @@ func NewFins(plcType PlcType, transType TransType, addr string) Fins {
 	return ret
 }
 
+func (f *fins) Open() error {
+	if f.transporter != nil {
+		return f.transporter.Open()
+	}
+
+	return nil
+}
+
+func (f *fins) Close() error {
+	if f.transporter != nil {
+		defer func() {
+			f.transporter = nil
+		}()
+
+		return f.transporter.Close()
+	}
+
+	return nil
+}
+
 func (f *fins) Read(address *FinAddress, length uint16) ([]*FinValue, error) {
 	req := &bytes.Buffer{}
 

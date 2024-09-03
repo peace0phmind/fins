@@ -43,6 +43,8 @@ func (fv *FinValue) SetValue(value any) error {
 }
 
 type Fins interface {
+	Open() error
+	Close() error
 	Read(address *FinAddress, length uint16) ([]*FinValue, error)
 	Write(address *FinAddress, values []*FinValue) error
 	RandomRead(addresses []*FinAddress) ([]*FinValue, error)
