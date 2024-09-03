@@ -13,6 +13,16 @@ PlcType
 type PlcType int
 
 /*
+TransType
+
+	@Enum {
+		Tcp
+		Udp
+	}
+*/
+type TransType int
+
+/*
 Area
 
 	@EnumConfig(NoCamel, NoCase)

@@ -156,6 +156,26 @@ const (
 	PlcTypeOld
 )
 
+const (
+	// StateUnknown is a State of type Unknown.
+	StateUnknown State = iota
+	// StateConnecting is a State of type Connecting.
+	StateConnecting
+	// StateConnected is a State of type Connected.
+	StateConnected
+	// StateDisconnected is a State of type Disconnected.
+	StateDisconnected
+	// StateConnectClosed is a State of type ConnectClosed.
+	StateConnectClosed
+)
+
+const (
+	// TransTypeTcp is a TransType of type Tcp.
+	TransTypeTcp TransType = iota
+	// TransTypeUdp is a TransType of type Udp.
+	TransTypeUdp
+)
+
 var ErrInvalidArea = errors.New("not a valid Area")
 
 var _AreaNameMap = map[string]Area{
@@ -893,4 +913,104 @@ func ParsePlcType(value string) (PlcType, error) {
 		return x, nil
 	}
 	return PlcType(0), fmt.Errorf("%s is %w", value, ErrInvalidPlcType)
+}
+
+var ErrInvalidState = errors.New("not a valid State")
+
+var _StateName = "UnknownConnectingConnectedDisconnectedConnectClosed"
+
+var _StateMapName = map[State]string{
+	StateUnknown:       _StateName[0:7],
+	StateConnecting:    _StateName[7:17],
+	StateConnected:     _StateName[17:26],
+	StateDisconnected:  _StateName[26:38],
+	StateConnectClosed: _StateName[38:51],
+}
+
+// Name is the attribute of State.
+func (x State) Name() string {
+	if v, ok := _StateMapName[x]; ok {
+		return v
+	}
+	return fmt.Sprintf("State(%d).Name", x)
+}
+
+// Val is the attribute of State.
+func (x State) Val() int {
+	return int(x)
+}
+
+// IsValid provides a quick way to determine if the typed value is
+// part of the allowed enumerated values
+func (x State) IsValid() bool {
+	_, ok := _StateMapName[x]
+	return ok
+}
+
+// String implements the Stringer interface.
+func (x State) String() string {
+	return x.Name()
+}
+
+var _StateNameMap = map[string]State{
+	_StateName[0:7]:   StateUnknown,
+	_StateName[7:17]:  StateConnecting,
+	_StateName[17:26]: StateConnected,
+	_StateName[26:38]: StateDisconnected,
+	_StateName[38:51]: StateConnectClosed,
+}
+
+// ParseState converts a string to a State.
+func ParseState(value string) (State, error) {
+	if x, ok := _StateNameMap[value]; ok {
+		return x, nil
+	}
+	return State(0), fmt.Errorf("%s is %w", value, ErrInvalidState)
+}
+
+var ErrInvalidTransType = errors.New("not a valid TransType")
+
+var _TransTypeName = "TcpUdp"
+
+var _TransTypeMapName = map[TransType]string{
+	TransTypeTcp: _TransTypeName[0:3],
+	TransTypeUdp: _TransTypeName[3:6],
+}
+
+// Name is the attribute of TransType.
+func (x TransType) Name() string {
+	if v, ok := _TransTypeMapName[x]; ok {
+		return v
+	}
+	return fmt.Sprintf("TransType(%d).Name", x)
+}
+
+// Val is the attribute of TransType.
+func (x TransType) Val() int {
+	return int(x)
+}
+
+// IsValid provides a quick way to determine if the typed value is
+// part of the allowed enumerated values
+func (x TransType) IsValid() bool {
+	_, ok := _TransTypeMapName[x]
+	return ok
+}
+
+// String implements the Stringer interface.
+func (x TransType) String() string {
+	return x.Name()
+}
+
+var _TransTypeNameMap = map[string]TransType{
+	_TransTypeName[0:3]: TransTypeTcp,
+	_TransTypeName[3:6]: TransTypeUdp,
+}
+
+// ParseTransType converts a string to a TransType.
+func ParseTransType(value string) (TransType, error) {
+	if x, ok := _TransTypeNameMap[value]; ok {
+		return x, nil
+	}
+	return TransType(0), fmt.Errorf("%s is %w", value, ErrInvalidTransType)
 }
