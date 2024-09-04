@@ -45,6 +45,13 @@ const (
 )
 
 const (
+	// DataClassCommand is a DataClass of type Command.
+	DataClassCommand DataClass = iota
+	// DataClassResponse is a DataClass of type Response.
+	DataClassResponse
+)
+
+const (
 	// DataTypeBit is a DataType of type Bit.
 	DataTypeBit DataType = "Bit"
 	// DataTypeBitFs is a DataType of type BitFs.
@@ -167,6 +174,11 @@ const (
 	StateDisconnected
 	// StateConnectClosed is a State of type ConnectClosed.
 	StateConnectClosed
+)
+
+const (
+	// TcpCommandFrameSend is a TcpCommand of type FrameSend.
+	TcpCommandFrameSend TcpCommand = 2
 )
 
 const (
@@ -318,6 +330,53 @@ func ParseCommand(value string) (Command, error) {
 		return x, nil
 	}
 	return Command(0), fmt.Errorf("%s is %w", value, ErrInvalidCommand)
+}
+
+var ErrInvalidDataClass = errors.New("not a valid DataClass")
+
+var _DataClassName = "CommandResponse"
+
+var _DataClassMapName = map[DataClass]string{
+	DataClassCommand:  _DataClassName[0:7],
+	DataClassResponse: _DataClassName[7:15],
+}
+
+// Name is the attribute of DataClass.
+func (x DataClass) Name() string {
+	if v, ok := _DataClassMapName[x]; ok {
+		return v
+	}
+	return fmt.Sprintf("DataClass(%d).Name", x)
+}
+
+// Val is the attribute of DataClass.
+func (x DataClass) Val() int {
+	return int(x)
+}
+
+// IsValid provides a quick way to determine if the typed value is
+// part of the allowed enumerated values
+func (x DataClass) IsValid() bool {
+	_, ok := _DataClassMapName[x]
+	return ok
+}
+
+// String implements the Stringer interface.
+func (x DataClass) String() string {
+	return x.Name()
+}
+
+var _DataClassNameMap = map[string]DataClass{
+	_DataClassName[0:7]:  DataClassCommand,
+	_DataClassName[7:15]: DataClassResponse,
+}
+
+// ParseDataClass converts a string to a DataClass.
+func ParseDataClass(value string) (DataClass, error) {
+	if x, ok := _DataClassNameMap[value]; ok {
+		return x, nil
+	}
+	return DataClass(0), fmt.Errorf("%s is %w", value, ErrInvalidDataClass)
 }
 
 var ErrInvalidDataType = errors.New("not a valid DataType")
@@ -953,11 +1012,16 @@ func (x State) String() string {
 }
 
 var _StateNameMap = map[string]State{
-	_StateName[0:7]:   StateUnknown,
-	_StateName[7:17]:  StateConnecting,
-	_StateName[17:26]: StateConnected,
-	_StateName[26:38]: StateDisconnected,
-	_StateName[38:51]: StateConnectClosed,
+	_StateName[0:7]:                    StateUnknown,
+	strings.ToLower(_StateName[0:7]):   StateUnknown,
+	_StateName[7:17]:                   StateConnecting,
+	strings.ToLower(_StateName[7:17]):  StateConnecting,
+	_StateName[17:26]:                  StateConnected,
+	strings.ToLower(_StateName[17:26]): StateConnected,
+	_StateName[26:38]:                  StateDisconnected,
+	strings.ToLower(_StateName[26:38]): StateDisconnected,
+	_StateName[38:51]:                  StateConnectClosed,
+	strings.ToLower(_StateName[38:51]): StateConnectClosed,
 }
 
 // ParseState converts a string to a State.
@@ -965,7 +1029,70 @@ func ParseState(value string) (State, error) {
 	if x, ok := _StateNameMap[value]; ok {
 		return x, nil
 	}
+	if x, ok := _StateNameMap[strings.ToLower(value)]; ok {
+		return x, nil
+	}
 	return State(0), fmt.Errorf("%s is %w", value, ErrInvalidState)
+}
+
+// MarshalText implements the text marshaller method.
+func (x State) MarshalText() ([]byte, error) {
+	return []byte(x.String()), nil
+}
+
+// UnmarshalText implements the text unmarshaller method.
+func (x *State) UnmarshalText(text []byte) error {
+	val, err := ParseState(string(text))
+	if err != nil {
+		return err
+	}
+	*x = val
+	return nil
+}
+
+var ErrInvalidTcpCommand = errors.New("not a valid TcpCommand")
+
+var _TcpCommandName = "FrameSend"
+
+var _TcpCommandMapName = map[TcpCommand]string{
+	TcpCommandFrameSend: _TcpCommandName[0:9],
+}
+
+// Name is the attribute of TcpCommand.
+func (x TcpCommand) Name() string {
+	if v, ok := _TcpCommandMapName[x]; ok {
+		return v
+	}
+	return fmt.Sprintf("TcpCommand(%d).Name", x)
+}
+
+// Val is the attribute of TcpCommand.
+func (x TcpCommand) Val() int {
+	return int(x)
+}
+
+// IsValid provides a quick way to determine if the typed value is
+// part of the allowed enumerated values
+func (x TcpCommand) IsValid() bool {
+	_, ok := _TcpCommandMapName[x]
+	return ok
+}
+
+// String implements the Stringer interface.
+func (x TcpCommand) String() string {
+	return x.Name()
+}
+
+var _TcpCommandNameMap = map[string]TcpCommand{
+	_TcpCommandName[0:9]: TcpCommandFrameSend,
+}
+
+// ParseTcpCommand converts a string to a TcpCommand.
+func ParseTcpCommand(value string) (TcpCommand, error) {
+	if x, ok := _TcpCommandNameMap[value]; ok {
+		return x, nil
+	}
+	return TcpCommand(0), fmt.Errorf("%s is %w", value, ErrInvalidTcpCommand)
 }
 
 var ErrInvalidTransType = errors.New("not a valid TransType")

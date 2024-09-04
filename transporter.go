@@ -8,6 +8,7 @@ import (
 /*
 State
 
+	@EnumConfig(marshal, noCase)
 	@Enum {
 		Unknown
 		Connecting
@@ -22,8 +23,10 @@ type Transporter interface {
 	Open() error
 	Close() error
 	Write(data []byte) (int, error)
-	Read(buf []byte) (int, error)
+	ReadHeader() (*respFinsHeader, error)
+	ReadData(buf []byte) (int, error)
 	State() State
+	setState(state State)
 	SetStateChangeCallback(callback func(oldState, newState State))
 }
 

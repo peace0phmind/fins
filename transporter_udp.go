@@ -1,6 +1,8 @@
 package fins
 
 import (
+	"bytes"
+	"encoding/binary"
 	"github.com/expgo/factory"
 	"net"
 	"time"
@@ -66,7 +68,29 @@ func (t *UdpTransporter) Write(data []byte) (n int, err error) {
 	return t.conn.Write(data)
 }
 
-func (t *UdpTransporter) Read(buf []byte) (n int, err error) {
+func (t *UdpTransporter) ReadHeader() (header *respFinsHeader, err error) {
+	defer func() {
+		if err != nil {
+			t.setState(StateDisconnected)
+		}
+	}()
+
+	headerBuf := make([]byte, respHeaderSize)
+	_, err = t.ReadData(headerBuf)
+	if err != nil {
+		return nil, err
+	}
+
+	header = &respFinsHeader{}
+	err = binary.Read(bytes.NewReader(headerBuf), binary.BigEndian, header)
+	if err != nil {
+		return nil, err
+	}
+
+	return header, nil
+}
+
+func (t *UdpTransporter) ReadData(buf []byte) (n int, err error) {
 	defer func() {
 		if err != nil {
 			t.setState(StateDisconnected)
