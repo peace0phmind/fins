@@ -130,10 +130,18 @@ func (t *TcpTransporter) Close() error {
 		t.setState(StateDisconnected)
 	}()
 
+	if t.conn == nil {
+		return nil
+	}
+
 	return t.conn.Close()
 }
 
 func (t *TcpTransporter) Write(header *finsHeader, data []byte) (n int, err error) {
+	if t.conn == nil || t.state == StateDisconnected {
+		return 0, errors.New("tcp transporter not connected")
+	}
+
 	defer func() {
 		if err != nil {
 			t.setState(StateDisconnected)
@@ -201,6 +209,10 @@ func (t *TcpTransporter) ReadTcpHeader() (tcpHeader *tcpFinsHeader, err error) {
 }
 
 func (t *TcpTransporter) ReadHeader() (header *respFinsHeader, err error) {
+	if t.conn == nil || t.state == StateDisconnected {
+		return nil, errors.New("tcp transporter not connected")
+	}
+
 	defer func() {
 		if err != nil {
 			t.setState(StateDisconnected)
@@ -228,6 +240,10 @@ func (t *TcpTransporter) ReadHeader() (header *respFinsHeader, err error) {
 }
 
 func (t *TcpTransporter) ReadData(buf []byte) (n int, err error) {
+	if t.conn == nil || t.state == StateDisconnected {
+		return 0, errors.New("tcp transporter not connected")
+	}
+
 	defer func() {
 		if err != nil {
 			t.setState(StateDisconnected)
