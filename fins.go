@@ -339,14 +339,14 @@ func (f *fins) RandomRead(addresses []*FinAddress) ([]*FinValue, error) {
 		return nil, err
 	}
 
-	resp := make([]byte, itemsSize)
+	resp := make([]byte, itemsSize+len(addresses))
 	_, err = f.transporter.ReadData(resp)
 	if err != nil {
 		f.L.Warnf("read data from transporter failed: %v", err)
 		return nil, err
 	}
 
-	values := make([]*FinValue, len(addresses))
+	var values []*FinValue
 	readSize := 0
 	for _, address := range addresses {
 		itemSize := address.AreaCode.Size()

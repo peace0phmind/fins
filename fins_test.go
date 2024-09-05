@@ -37,3 +37,20 @@ func TestFinsWrite(t *testing.T) {
 	err = f.Write(addr, []*FinValue{value})
 	assert.NoError(t, err)
 }
+
+func TestFinsRandomRead(t *testing.T) {
+	f := NewFins(PlcTypeNew, TransTypeTcp, "0.0.0.0:9600")
+
+	err := f.Open()
+	defer func() {
+		_ = f.Close()
+	}()
+
+	assert.NoError(t, err)
+
+	values, err := f.RandomRead([]*FinAddress{{AreaCode: MemoryAreaDMWord, Address: 0}, {AreaCode: MemoryAreaWRWord, Address: 0}})
+	assert.NoError(t, err)
+
+	println(values[0].Uint16())
+	println(values[1].Uint16())
+}
