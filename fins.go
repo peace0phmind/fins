@@ -220,7 +220,7 @@ func (f *fins) Read(address *FinAddress, length uint16) ([]*FinValue, error) {
 	values := make([]*FinValue, length)
 	for i := 0; i < int(length); i++ {
 		newAddr := structure.Clone(address)
-		newAddr.Address += 1
+		newAddr.Address += uint16(i)
 		values[i] = &FinValue{
 			FinAddress: newAddr,
 			Buf:        resp[i*itemSize : (i+1)*itemSize],

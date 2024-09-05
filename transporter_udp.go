@@ -3,6 +3,7 @@ package fins
 import (
 	"bytes"
 	"encoding/binary"
+	"errors"
 	"github.com/expgo/factory"
 	"net"
 	"time"
@@ -11,11 +12,16 @@ import (
 type UdpTransporter struct {
 	baseTransporter
 	conn *net.UDPConn
+	da1  byte
+	sa1  byte
 }
 
 func newUdpTransport(addr string) *UdpTransporter {
 	return factory.NewWithFunc[UdpTransporter](func() *UdpTransporter {
-		return &UdpTransporter{baseTransporter: baseTransporter{addr: addr}}
+		return &UdpTransporter{baseTransporter: baseTransporter{addr: addr},
+			da1: 0xe8,
+			sa1: 0x38,
+		}
 	})
 }
 
@@ -54,18 +60,39 @@ func (t *UdpTransporter) Close() error {
 }
 
 func (t *UdpTransporter) Write(header *finsHeader, data []byte) (n int, err error) {
+	if t.conn == nil || t.state == StateDisconnected {
+		return 0, errors.New("udp transporter not connected")
+	}
+
 	defer func() {
 		if err != nil {
 			t.setState(StateDisconnected)
 		}
 	}()
 
+	header.DA1 = t.da1
+	header.SA1 = t.sa1
+
+	buf := &bytes.Buffer{}
+
+	err = binary.Write(buf, binary.BigEndian, header)
+	if err != nil {
+		return 0, err
+	}
+
+	if len(data) > 0 {
+		_, err = buf.Write(data)
+		if err != nil {
+			return 0, err
+		}
+	}
+
 	err = t.conn.SetWriteDeadline(time.Now().Add(t.WriteTimeout))
 	if err != nil {
 		return 0, err
 	}
 
-	return t.conn.Write(data)
+	return t.conn.Write(buf.Bytes())
 }
 
 func (t *UdpTransporter) ReadHeader() (header *respFinsHeader, err error) {
