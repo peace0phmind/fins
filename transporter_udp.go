@@ -53,7 +53,7 @@ func (t *UdpTransporter) Close() error {
 	return t.conn.Close()
 }
 
-func (t *UdpTransporter) Write(data []byte) (n int, err error) {
+func (t *UdpTransporter) Write(header *finsHeader, data []byte) (n int, err error) {
 	defer func() {
 		if err != nil {
 			t.setState(StateDisconnected)

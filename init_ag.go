@@ -177,6 +177,10 @@ const (
 )
 
 const (
+	// TcpCommandNodeAddressClientToServer is a TcpCommand of type NodeAddressClientToServer.
+	TcpCommandNodeAddressClientToServer TcpCommand = 0
+	// TcpCommandNodeAddressServerToClient is a TcpCommand of type NodeAddressServerToClient.
+	TcpCommandNodeAddressServerToClient TcpCommand = 1
 	// TcpCommandFrameSend is a TcpCommand of type FrameSend.
 	TcpCommandFrameSend TcpCommand = 2
 )
@@ -1052,10 +1056,12 @@ func (x *State) UnmarshalText(text []byte) error {
 
 var ErrInvalidTcpCommand = errors.New("not a valid TcpCommand")
 
-var _TcpCommandName = "FrameSend"
+var _TcpCommandName = "NodeAddressClientToServerNodeAddressServerToClientFrameSend"
 
 var _TcpCommandMapName = map[TcpCommand]string{
-	TcpCommandFrameSend: _TcpCommandName[0:9],
+	TcpCommandNodeAddressClientToServer: _TcpCommandName[0:25],
+	TcpCommandNodeAddressServerToClient: _TcpCommandName[25:50],
+	TcpCommandFrameSend:                 _TcpCommandName[50:59],
 }
 
 // Name is the attribute of TcpCommand.
@@ -1067,8 +1073,8 @@ func (x TcpCommand) Name() string {
 }
 
 // Val is the attribute of TcpCommand.
-func (x TcpCommand) Val() int {
-	return int(x)
+func (x TcpCommand) Val() uint32 {
+	return uint32(x)
 }
 
 // IsValid provides a quick way to determine if the typed value is
@@ -1084,7 +1090,9 @@ func (x TcpCommand) String() string {
 }
 
 var _TcpCommandNameMap = map[string]TcpCommand{
-	_TcpCommandName[0:9]: TcpCommandFrameSend,
+	_TcpCommandName[0:25]:  TcpCommandNodeAddressClientToServer,
+	_TcpCommandName[25:50]: TcpCommandNodeAddressServerToClient,
+	_TcpCommandName[50:59]: TcpCommandFrameSend,
 }
 
 // ParseTcpCommand converts a string to a TcpCommand.

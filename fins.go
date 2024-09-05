@@ -161,14 +161,13 @@ func (f *fins) Close() error {
 }
 
 func (f *fins) Read(address *FinAddress, length uint16) ([]*FinValue, error) {
-	req := &bytes.Buffer{}
-
-	reqHeader := newFinsHeader(DataClassCommand, true, byte(f.sid.Add(1)))
-	if err := binary.Write(req, binary.BigEndian, reqHeader); err != nil {
-		f.L.Warnf("encode header failed: %v", err)
-		return nil, err
+	if length == 0 {
+		return nil, errors.New("fins: Read called with zero length")
 	}
 
+	reqHeader := newFinsHeader(DataClassCommand, true, byte(f.sid.Add(1)))
+
+	req := &bytes.Buffer{}
 	_ = req.WriteByte(CommandMemoryRead.Mr())
 	_ = req.WriteByte(CommandMemoryRead.Sr())
 
@@ -181,7 +180,7 @@ func (f *fins) Read(address *FinAddress, length uint16) ([]*FinValue, error) {
 	_, _ = req.Write(addr[:])
 	_ = binary.Write(req, binary.BigEndian, length)
 
-	_, err = f.transporter.Write(req.Bytes())
+	_, err = f.transporter.Write(reqHeader, req.Bytes())
 	if err != nil {
 		f.L.Warnf("write to transporter failed: %v", err)
 		return nil, err
@@ -236,14 +235,9 @@ func (f *fins) Write(address *FinAddress, values []*FinValue) error {
 		return errors.New("no values to write")
 	}
 
-	req := &bytes.Buffer{}
-
 	reqHeader := newFinsHeader(DataClassCommand, true, byte(f.sid.Add(1)))
-	if err := binary.Write(req, binary.BigEndian, reqHeader); err != nil {
-		f.L.Warnf("encode header failed: %v", err)
-		return err
-	}
 
+	req := &bytes.Buffer{}
 	_ = req.WriteByte(CommandMemoryWrite.Mr())
 	_ = req.WriteByte(CommandMemoryWrite.Sr())
 
@@ -260,7 +254,7 @@ func (f *fins) Write(address *FinAddress, values []*FinValue) error {
 		req.Write(value.Buf)
 	}
 
-	_, err = f.transporter.Write(req.Bytes())
+	_, err = f.transporter.Write(reqHeader, req.Bytes())
 	if err != nil {
 		f.L.Warnf("write to transporter failed: %v", err)
 		return err
@@ -296,14 +290,9 @@ func (f *fins) RandomRead(addresses []*FinAddress) ([]*FinValue, error) {
 		return nil, errors.New("no addresses to read")
 	}
 
-	req := &bytes.Buffer{}
-
 	reqHeader := newFinsHeader(DataClassCommand, true, byte(f.sid.Add(1)))
-	if err := binary.Write(req, binary.BigEndian, reqHeader); err != nil {
-		f.L.Warnf("encode header failed: %v", err)
-		return nil, err
-	}
 
+	req := &bytes.Buffer{}
 	_ = req.WriteByte(CommandMultipleMemoryRead.Mr())
 	_ = req.WriteByte(CommandMultipleMemoryRead.Sr())
 
@@ -321,7 +310,7 @@ func (f *fins) RandomRead(addresses []*FinAddress) ([]*FinValue, error) {
 		req.Write(addr[:])
 	}
 
-	_, err := f.transporter.Write(req.Bytes())
+	_, err := f.transporter.Write(reqHeader, req.Bytes())
 	if err != nil {
 		f.L.Warnf("write to transporter failed: %v", err)
 		return nil, err

@@ -22,7 +22,7 @@ type State int
 type Transporter interface {
 	Open() error
 	Close() error
-	Write(data []byte) (int, error)
+	Write(header *finsHeader, data []byte) (int, error)
 	ReadHeader() (*respFinsHeader, error)
 	ReadData(buf []byte) (int, error)
 	State() State

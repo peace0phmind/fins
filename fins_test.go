@@ -11,8 +11,10 @@ func TestFins(t *testing.T) {
 	err := f.Open()
 	assert.NoError(t, err)
 
-	ret, err := f.Read(&FinAddress{AreaCode: MemoryAreaWRWord, Address: 0, Offset: 0}, 0)
+	ret, err := f.Read(&FinAddress{AreaCode: MemoryAreaWRWord, Address: 0, Offset: 0}, 1)
 	assert.NoError(t, err)
 
-	println(ret[0].Value())
+	println(ret[0].Uint16())
+
+	_ = f.Close()
 }

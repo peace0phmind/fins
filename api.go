@@ -29,6 +29,14 @@ func (fv *FinValue) Value() any {
 	}
 }
 
+func (fv *FinValue) Uint16() uint16 {
+	return fv.Value().(uint16)
+}
+
+func (fv *FinValue) Uint32() uint32 {
+	return fv.Value().(uint32)
+}
+
 func (fv *FinValue) SetValue(value any) error {
 	switch fv.AreaCode.Size() {
 	case 1:
