@@ -248,7 +248,7 @@ func (f *fins) Write(address *FinAddress, values []*FinValue) error {
 	}
 
 	_, _ = req.Write(addr[:])
-	_ = binary.Write(req, binary.BigEndian, len(values))
+	_ = binary.Write(req, binary.BigEndian, uint16(len(values)))
 
 	for _, value := range values {
 		req.Write(value.Buf)
