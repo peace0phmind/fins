@@ -56,4 +56,5 @@ type Fins interface {
 	Read(address *FinAddress, length uint16) ([]*FinValue, error)
 	Write(address *FinAddress, values []*FinValue) error
 	RandomRead(addresses []*FinAddress) ([]*FinValue, error)
+	SetStateChangeCallback(callback func(oldState, newState State))
 }
