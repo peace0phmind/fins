@@ -160,6 +160,12 @@ func (f *fins) Close() error {
 	return nil
 }
 
+func (f *fins) SetStateChangeCallback(callback func(oldState, newState State)) {
+	if f.transporter != nil {
+		f.transporter.SetStateChangeCallback(callback)
+	}
+}
+
 func (f *fins) Read(address *FinAddress, length uint16) ([]*FinValue, error) {
 	if length == 0 {
 		return nil, errors.New("fins: Read called with zero length")
