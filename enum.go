@@ -15,6 +15,7 @@ type PlcType int
 /*
 TransType
 
+	@EnumConfig(NoCamel, NoCase)
 	@Enum {
 		Tcp
 		Udp

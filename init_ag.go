@@ -1138,13 +1138,18 @@ func (x TransType) String() string {
 }
 
 var _TransTypeNameMap = map[string]TransType{
-	_TransTypeName[0:3]: TransTypeTcp,
-	_TransTypeName[3:6]: TransTypeUdp,
+	_TransTypeName[0:3]:                  TransTypeTcp,
+	strings.ToLower(_TransTypeName[0:3]): TransTypeTcp,
+	_TransTypeName[3:6]:                  TransTypeUdp,
+	strings.ToLower(_TransTypeName[3:6]): TransTypeUdp,
 }
 
 // ParseTransType converts a string to a TransType.
 func ParseTransType(value string) (TransType, error) {
 	if x, ok := _TransTypeNameMap[value]; ok {
+		return x, nil
+	}
+	if x, ok := _TransTypeNameMap[strings.ToLower(value)]; ok {
 		return x, nil
 	}
 	return TransType(0), fmt.Errorf("%s is %w", value, ErrInvalidTransType)
