@@ -29,6 +29,10 @@ func (fv *FinValue) Value() any {
 	}
 }
 
+func (fv *FinValue) Byte() byte {
+	return fv.Value().(byte)
+}
+
 func (fv *FinValue) Uint16() uint16 {
 	return fv.Value().(uint16)
 }
