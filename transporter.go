@@ -2,6 +2,7 @@ package fins
 
 import (
 	"github.com/expgo/log"
+	"sync"
 	"time"
 )
 
@@ -26,7 +27,7 @@ type Transporter interface {
 	ReadHeader() (*respFinsHeader, error)
 	ReadData(buf []byte) (int, error)
 	State() State
-	setState(state State)
+	setState(state State, err error)
 	SetStateChangeCallback(callback func(oldState, newState State))
 }
 
@@ -41,6 +42,7 @@ type baseTransporter struct {
 	state          State       `value:"unknown"`
 	self           Transporter `wire:"self"`
 	callback       func(oldState, newState State)
+	stateLock      sync.Mutex
 }
 
 func (t *baseTransporter) State() State {
@@ -50,7 +52,10 @@ func (t *baseTransporter) SetStateChangeCallback(callback func(oldState, newStat
 	t.callback = callback
 }
 
-func (t *baseTransporter) setState(state State) {
+func (t *baseTransporter) setState(state State, err error) {
+	t.stateLock.Lock()
+	defer t.stateLock.Unlock()
+
 	if state == StateDisconnected {
 		t.startReconnectTimer()
 	}
@@ -59,7 +64,7 @@ func (t *baseTransporter) setState(state State) {
 		t.callback(t.state, state)
 	}
 
-	t.L.Infof("%s state change, old state: %s, new state: %s", t.addr, t.state, state)
+	t.L.Infof("%s state change, old state: %s, new state: %s, err: %v", t.addr, t.state, state, err)
 
 	t.state = state
 }

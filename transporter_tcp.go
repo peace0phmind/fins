@@ -54,30 +54,34 @@ func (t *TcpTransporter) Open() error {
 		return nil
 	}
 
-	t.setState(StateConnecting)
+	t.setState(StateConnecting, nil)
 	tcpAddr, err := net.ResolveTCPAddr("tcp", t.addr)
 	if err != nil {
 		t.L.Warnf("Resolve TCPAddr %s failed: %v", t.addr, err)
-		t.setState(StateDisconnected)
+		t.setState(StateDisconnected, err)
 		return err
 	}
 
 	t.conn, err = net.DialTCP("tcp", nil, tcpAddr)
 	if err != nil {
 		t.L.Warnf("DialTCP %s failed: %v", t.addr, err)
-		t.setState(StateDisconnected)
+		t.setState(StateDisconnected, err)
 		return err
 	}
 
-	t.setState(StateConnected)
+	err = t.getDaSa()
 
-	return t.getDaSa()
+	if err == nil {
+		t.setState(StateConnected, nil)
+	}
+
+	return err
 }
 
 func (t *TcpTransporter) getDaSa() (err error) {
 	defer func() {
 		if err != nil {
-			t.setState(StateDisconnected)
+			t.setState(StateDisconnected, err)
 		}
 	}()
 
@@ -124,10 +128,10 @@ func (t *TcpTransporter) getDaSa() (err error) {
 	return nil
 }
 
-func (t *TcpTransporter) Close() error {
+func (t *TcpTransporter) Close() (err error) {
 	defer func() {
+		t.setState(StateConnectClosed, err)
 		t.conn = nil
-		t.setState(StateDisconnected)
 	}()
 
 	if t.conn == nil {
@@ -144,7 +148,7 @@ func (t *TcpTransporter) Write(header *finsHeader, data []byte) (n int, err erro
 
 	defer func() {
 		if err != nil {
-			t.setState(StateDisconnected)
+			t.setState(StateDisconnected, err)
 		}
 	}()
 
@@ -215,7 +219,7 @@ func (t *TcpTransporter) ReadHeader() (header *respFinsHeader, err error) {
 
 	defer func() {
 		if err != nil {
-			t.setState(StateDisconnected)
+			t.setState(StateDisconnected, err)
 		}
 	}()
 
@@ -246,7 +250,7 @@ func (t *TcpTransporter) ReadData(buf []byte) (n int, err error) {
 
 	defer func() {
 		if err != nil {
-			t.setState(StateDisconnected)
+			t.setState(StateDisconnected, err)
 		}
 	}()
 

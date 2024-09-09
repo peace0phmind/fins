@@ -200,7 +200,7 @@ func (f *fins) Read(address *FinAddress, length uint16) ([]*FinValue, error) {
 	}
 
 	if reqHeader.SID != respHeader.SID {
-		f.transporter.setState(StateDisconnected)
+		f.transporter.setState(StateDisconnected, errors.New("sid not equals"))
 		f.L.Error("req sid not equal to resp sid, reconnect to remote")
 		return nil, fmt.Errorf("expected sid %v but got %v", respHeader.SID, reqHeader.SID)
 	}
@@ -274,7 +274,7 @@ func (f *fins) Write(address *FinAddress, values []*FinValue) error {
 	}
 
 	if reqHeader.SID != respHeader.SID {
-		f.transporter.setState(StateDisconnected)
+		f.transporter.setState(StateDisconnected, errors.New("sid not equals"))
 		f.L.Error("req sid not equal to resp sid, reconnect to remote")
 		return fmt.Errorf("expected sid %v but got %v", respHeader.SID, reqHeader.SID)
 	}
@@ -330,7 +330,7 @@ func (f *fins) RandomRead(addresses []*FinAddress) ([]*FinValue, error) {
 	}
 
 	if reqHeader.SID != respHeader.SID {
-		f.transporter.setState(StateDisconnected)
+		f.transporter.setState(StateDisconnected, errors.New("sid not equals"))
 		f.L.Error("req sid not equal to resp sid, reconnect to remote")
 		return nil, fmt.Errorf("expected sid %v but got %v", respHeader.SID, reqHeader.SID)
 	}

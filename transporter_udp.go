@@ -30,30 +30,30 @@ func (t *UdpTransporter) Open() error {
 		return nil
 	}
 
-	t.setState(StateConnecting)
+	t.setState(StateConnecting, nil)
 	serverAddr, err := net.ResolveUDPAddr("udp", t.addr)
 	if err != nil {
 		t.L.Warnf("Resolve UDPAddr %s failed: %v", t.addr, err)
-		t.setState(StateDisconnected)
+		t.setState(StateDisconnected, err)
 		return err
 	}
 
 	t.conn, err = net.DialUDP("udp", nil, serverAddr)
 	if err != nil {
 		t.L.Warnf("DialUDP %s failed: %v", t.addr, err)
-		t.setState(StateDisconnected)
+		t.setState(StateDisconnected, err)
 		return err
 	}
 
-	t.setState(StateConnected)
+	t.setState(StateConnected, nil)
 
 	return nil
 }
 
-func (t *UdpTransporter) Close() error {
+func (t *UdpTransporter) Close() (err error) {
 	defer func() {
 		t.conn = nil
-		t.setState(StateDisconnected)
+		t.setState(StateConnectClosed, err)
 	}()
 
 	return t.conn.Close()
@@ -66,7 +66,7 @@ func (t *UdpTransporter) Write(header *finsHeader, data []byte) (n int, err erro
 
 	defer func() {
 		if err != nil {
-			t.setState(StateDisconnected)
+			t.setState(StateDisconnected, err)
 		}
 	}()
 
@@ -98,7 +98,7 @@ func (t *UdpTransporter) Write(header *finsHeader, data []byte) (n int, err erro
 func (t *UdpTransporter) ReadHeader() (header *respFinsHeader, err error) {
 	defer func() {
 		if err != nil {
-			t.setState(StateDisconnected)
+			t.setState(StateDisconnected, err)
 		}
 	}()
 
@@ -120,7 +120,7 @@ func (t *UdpTransporter) ReadHeader() (header *respFinsHeader, err error) {
 func (t *UdpTransporter) ReadData(buf []byte) (n int, err error) {
 	defer func() {
 		if err != nil {
-			t.setState(StateDisconnected)
+			t.setState(StateDisconnected, err)
 		}
 	}()
 
