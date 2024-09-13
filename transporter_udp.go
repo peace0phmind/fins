@@ -11,9 +11,8 @@ import (
 
 type UdpTransporter struct {
 	baseTransporter
-	conn *net.UDPConn
-	da1  byte
-	sa1  byte
+	da1 byte
+	sa1 byte
 }
 
 func newUdpTransport(addr string) *UdpTransporter {
@@ -25,20 +24,14 @@ func newUdpTransport(addr string) *UdpTransporter {
 	})
 }
 
-func (t *UdpTransporter) Open() error {
+func (t *UdpTransporter) Open() (err error) {
 	if t.state == StateConnected {
 		return nil
 	}
 
 	t.setState(StateConnecting, nil)
-	serverAddr, err := net.ResolveUDPAddr("udp", t.addr)
-	if err != nil {
-		t.L.Warnf("Resolve UDPAddr %s failed: %v", t.addr, err)
-		t.setState(StateDisconnected, err)
-		return err
-	}
-
-	t.conn, err = net.DialUDP("udp", nil, serverAddr)
+	dailer := net.Dialer{Timeout: 3 * time.Second}
+	t.conn, err = dailer.Dial("udp", t.addr)
 	if err != nil {
 		t.L.Warnf("DialUDP %s failed: %v", t.addr, err)
 		t.setState(StateDisconnected, err)
@@ -52,9 +45,15 @@ func (t *UdpTransporter) Open() error {
 
 func (t *UdpTransporter) Close() (err error) {
 	defer func() {
-		t.conn = nil
 		t.setState(StateConnectClosed, err)
+		t.conn = nil
 	}()
+
+	_ = t.baseTransporter.Close()
+
+	if t.conn == nil {
+		return nil
+	}
 
 	return t.conn.Close()
 }

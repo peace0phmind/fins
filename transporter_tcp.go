@@ -38,9 +38,8 @@ func newTcpFinsHeader(cmd TcpCommand) *tcpFinsHeader {
 
 type TcpTransporter struct {
 	baseTransporter
-	conn *net.TCPConn
-	da1  byte
-	sa1  byte
+	da1 byte
+	sa1 byte
 }
 
 func newTcpTransport(addr string) *TcpTransporter {
@@ -49,20 +48,18 @@ func newTcpTransport(addr string) *TcpTransporter {
 	})
 }
 
-func (t *TcpTransporter) Open() error {
+func (t *TcpTransporter) Open() (err error) {
+	if !t.running.CompareAndSwap(false, true) {
+		return nil
+	}
+
 	if t.state == StateConnected {
 		return nil
 	}
 
 	t.setState(StateConnecting, nil)
-	tcpAddr, err := net.ResolveTCPAddr("tcp", t.addr)
-	if err != nil {
-		t.L.Warnf("Resolve TCPAddr %s failed: %v", t.addr, err)
-		t.setState(StateDisconnected, err)
-		return err
-	}
-
-	t.conn, err = net.DialTCP("tcp", nil, tcpAddr)
+	dialer := net.Dialer{Timeout: 3 * time.Second}
+	t.conn, err = dialer.Dial("tcp", t.addr)
 	if err != nil {
 		t.L.Warnf("DialTCP %s failed: %v", t.addr, err)
 		t.setState(StateDisconnected, err)
@@ -133,6 +130,8 @@ func (t *TcpTransporter) Close() (err error) {
 		t.setState(StateConnectClosed, err)
 		t.conn = nil
 	}()
+
+	_ = t.baseTransporter.Close()
 
 	if t.conn == nil {
 		return nil

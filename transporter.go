@@ -2,7 +2,9 @@ package fins
 
 import (
 	"github.com/expgo/log"
+	"net"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -37,24 +39,44 @@ type baseTransporter struct {
 	WriteTimeout         time.Duration `value:"3s"`
 	ReconnectionInterval time.Duration `value:"10s"`
 	addr                 string
+	conn                 net.Conn
 
 	reconnectTimer *time.Timer
 	state          State       `value:"unknown"`
 	self           Transporter `wire:"self"`
 	callback       func(oldState, newState State)
 	stateLock      sync.Mutex
+	running        atomic.Bool
 }
 
 func (t *baseTransporter) State() State {
 	return t.state
 }
+
 func (t *baseTransporter) SetStateChangeCallback(callback func(oldState, newState State)) {
 	t.callback = callback
+}
+
+func (t *baseTransporter) Close() error {
+	if !t.running.CompareAndSwap(true, false) {
+		return nil
+	}
+
+	if t.reconnectTimer != nil {
+		t.reconnectTimer.Stop()
+		t.reconnectTimer = nil
+	}
+
+	return nil
 }
 
 func (t *baseTransporter) setState(state State, err error) {
 	t.stateLock.Lock()
 	defer t.stateLock.Unlock()
+
+	if !t.running.Load() {
+		return
+	}
 
 	if state == StateDisconnected {
 		t.startReconnectTimer()
@@ -70,6 +92,7 @@ func (t *baseTransporter) setState(state State, err error) {
 }
 
 func (t *baseTransporter) startReconnectTimer() {
+	t.L.Infof("transporter reconnect timer start")
 	if t.ReconnectionInterval <= 0 {
 		return
 	}
