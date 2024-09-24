@@ -2,8 +2,8 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/expgo/config v0.0.0-20240801091026-f22ce2bafd7d h1:1m/0TndDOecI6lcXFwNTKT/LPix+9SdeVnEyH7IzLl8=
 github.com/expgo/config v0.0.0-20240801091026-f22ce2bafd7d/go.mod h1:tftWoecRRkXz2+bS4nYJ8e90st4f1TwckbEqunHP9S0=
-github.com/expgo/factory v0.0.0-20240729025727-c5697ba5cff2 h1:CXFfJn/DnNi60UFkEDaS4ygav3QUXhY1LCnIpQmCetQ=
-github.com/expgo/factory v0.0.0-20240729025727-c5697ba5cff2/go.mod h1:gHbkJf9+L3LLrNpOASSe8PApg100ZRUEhVaas/m8Mnw=
+github.com/expgo/factory v0.0.0-20240924043526-55984ea3b18a h1:4ugExxegcErQWmdBJ3yH69bwawPJqWMQlxcRPI+wBKE=
+github.com/expgo/factory v0.0.0-20240924043526-55984ea3b18a/go.mod h1:gHbkJf9+L3LLrNpOASSe8PApg100ZRUEhVaas/m8Mnw=
 github.com/expgo/generic v0.0.0-20240814064603-ecd54aed10dc h1:cWcLO36Rqrc2yz7rEf7WMQykHij3m7uFRhRrkMIFt2A=
 github.com/expgo/generic v0.0.0-20240814064603-ecd54aed10dc/go.mod h1:CJcVaS/IBmVseDjlvEk36L1A+QyuZ2f4URS2RNHWkqQ=
 github.com/expgo/log v0.0.0-20240607062428-60b8a29db7e0 h1:bvLnxoHsXwLTMREufldZxr3IAH9fZ1n58m0nRwVkSsg=

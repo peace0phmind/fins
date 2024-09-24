@@ -43,8 +43,8 @@ type TcpTransporter struct {
 }
 
 func newTcpTransport(addr string) *TcpTransporter {
-	return factory.NewWithFunc[TcpTransporter](func() *TcpTransporter {
-		return &TcpTransporter{baseTransporter: baseTransporter{addr: addr}}
+	return factory.NewBeforeInit[TcpTransporter](func(ret *TcpTransporter) {
+		ret.baseTransporter = baseTransporter{addr: addr}
 	})
 }
 

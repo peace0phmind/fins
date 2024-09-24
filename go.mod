@@ -3,7 +3,7 @@ module github.com/peace0phmind/fins
 go 1.20
 
 require (
-	github.com/expgo/factory v0.0.0-20240729025727-c5697ba5cff2
+	github.com/expgo/factory v0.0.0-20240924043526-55984ea3b18a
 	github.com/expgo/log v0.0.0-20240607062428-60b8a29db7e0
 	github.com/expgo/structure v0.0.0-20240515010801-898cf0e94ad3
 	github.com/stretchr/testify v1.9.0

@@ -16,11 +16,10 @@ type UdpTransporter struct {
 }
 
 func newUdpTransport(addr string) *UdpTransporter {
-	return factory.NewWithFunc[UdpTransporter](func() *UdpTransporter {
-		return &UdpTransporter{baseTransporter: baseTransporter{addr: addr},
-			da1: 0xe8,
-			sa1: 0x38,
-		}
+	return factory.NewBeforeInit[UdpTransporter](func(ret *UdpTransporter) {
+		ret.baseTransporter = baseTransporter{addr: addr}
+		ret.da1 = 0xe8
+		ret.sa1 = 0x38
 	})
 }
 
