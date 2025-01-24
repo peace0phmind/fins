@@ -5,9 +5,10 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
-	"github.com/expgo/factory"
 	"net"
 	"time"
+
+	"github.com/expgo/factory"
 )
 
 /*
@@ -44,7 +45,7 @@ type TcpTransporter struct {
 
 func newTcpTransport(addr string) *TcpTransporter {
 	return factory.NewBeforeInit[TcpTransporter](func(ret *TcpTransporter) {
-		ret.baseTransporter = baseTransporter{addr: addr}
+		ret.baseTransporter.addr = addr
 	})
 }
 

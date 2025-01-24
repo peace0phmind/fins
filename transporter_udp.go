@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
-	"github.com/expgo/factory"
 	"net"
 	"time"
+
+	"github.com/expgo/factory"
 )
 
 type UdpTransporter struct {
@@ -17,7 +18,7 @@ type UdpTransporter struct {
 
 func newUdpTransport(addr string) *UdpTransporter {
 	return factory.NewBeforeInit[UdpTransporter](func(ret *UdpTransporter) {
-		ret.baseTransporter = baseTransporter{addr: addr}
+		ret.baseTransporter.addr = addr
 		ret.da1 = 0xe8
 		ret.sa1 = 0x38
 	})
